@@ -10,11 +10,13 @@ do
     esac
 done
 
+linkcmd="ln -s $forceflag"
+
 # vim
-ln -s $forceflag $PWD/vimrc ~/.vimrc
+$linkcmd $PWD/vimrc ~/.vimrc
 
 # zsh
-ln -s $forceflag $PWD/zcompdump ~/.zcompdump
-ln -s $forceflag $PWD/zprofile ~/.zprofile
-ln -s $forceflag $PWD/zshenv ~/.zshenv
-ln -s $forceflag $PWD/zshrc ~/.zshrc
+$linkcmd $PWD/zcompdump ~/.zcompdump
+$linkcmd $PWD/zprofile ~/.zprofile
+$linkcmd $PWD/zshenv ~/.zshenv
+$linkcmd $PWD/zshrc ~/.zshrc
