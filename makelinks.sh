@@ -15,6 +15,9 @@ linkcmd="ln -s $forceflag"
 # vim
 $linkcmd $PWD/vimrc ~/.vimrc
 
+# x11
+$linkcmd $PWD/xinitrc ~/.xinitrc
+
 # zsh
 $linkcmd $PWD/zcompdump ~/.zcompdump
 $linkcmd $PWD/zprofile ~/.zprofile
