@@ -12,3 +12,9 @@ done
 
 # vim
 ln -s $forceflag $PWD/vimrc ~/.vimrc
+
+# zsh
+ln -s $forceflag $PWD/zcompdump ~/.zcompdump
+ln -s $forceflag $PWD/zprofile ~/.zprofile
+ln -s $forceflag $PWD/zshenv ~/.zshenv
+ln -s $forceflag $PWD/zshrc ~/.zshrc
