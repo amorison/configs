@@ -18,6 +18,9 @@ $linkcmd $PWD/alias ~/.alias
 # LaTeX maker
 $linkcmd $PWD/latexmkrc ~/.latexmkrc
 
+# termite
+$linkcmd $PWD/termite ~/.config/termite/config
+
 # vim
 $linkcmd $PWD/vimrc ~/.vimrc
 
