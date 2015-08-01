@@ -12,6 +12,9 @@ done
 
 linkcmd="ln -s $forceflag"
 
+# alias
+$linkcmd $PWD/alias ~/.alias
+
 # LaTeX maker
 $linkcmd $PWD/latexmkrc ~/.latexmkrc
 
