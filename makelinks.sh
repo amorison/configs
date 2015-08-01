@@ -12,6 +12,9 @@ done
 
 linkcmd="ln -s $forceflag"
 
+# LaTeX maker
+$linkcmd $PWD/latexmkrc ~/.latexmkrc
+
 # vim
 $linkcmd $PWD/vimrc ~/.vimrc
 
