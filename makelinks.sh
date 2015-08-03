@@ -30,6 +30,10 @@ $linkcmd $PWD/latexmkrc ~/.latexmkrc
 mkdir -p ~/.config/termite
 $linkcmd $PWD/termite ~/.config/termite/config
 
+# tint2
+mkdir -p ~/.config/tint2
+$linkcmd $PWD/tint2rc ~/.config/tint2/tint2rc
+
 # vim
 $linkcmd $PWD/vimrc ~/.vimrc
 
