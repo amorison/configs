@@ -12,13 +12,22 @@ done
 
 linkcmd="ln -s $forceflag"
 
+
 # alias
 $linkcmd $PWD/alias ~/.alias
+
+# bspwm and sxhkd
+mkdir -p ~/.config/bspwm
+mkdir -p ~/.config/sxhkd
+chmod u+x bspwmrc
+$linkcmd $PWD/bspwmrc ~/.config/bspwm/bspwmrc
+$linkcmd $PWD/sxhkdrc ~/.config/sxhkd/sxhkdrc
 
 # LaTeX maker
 $linkcmd $PWD/latexmkrc ~/.latexmkrc
 
 # termite
+mkdir -p ~/.config/termite
 $linkcmd $PWD/termite ~/.config/termite/config
 
 # vim
