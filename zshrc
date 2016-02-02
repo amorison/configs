@@ -20,6 +20,23 @@ eval $(dircolors ~/.dircolors)
 
 autoload -U colors && colors
 
+sshmount () {
+    dirname=~/$1
+    if [ -d "${dirname}" ]
+    then
+        echo "${dirname} already exists, abort."
+    else
+        mkdir "${dirname}"
+        sshfs -C $1:. "${dirname}"
+    fi
+}
+
+sshumount () {
+    dirname=~/$1
+    fusermount -u "${dirname}"
+    rm -ri $dirname
+}
+
 setopt prompt_subst
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' stagedstr 'M' 
