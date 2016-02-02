@@ -26,6 +26,23 @@ normalize () {
     done
 }
 
+sshmount () {
+    dirname=~/$1
+    if [ -d "${dirname}" ]
+    then
+        echo "${dirname} already exists, abort."
+    else
+        mkdir "${dirname}"
+        sshfs -C $1:. "${dirname}"
+    fi
+}
+
+sshumount () {
+    dirname=~/$1
+    fusermount -u "${dirname}"
+    rmdir $dirname
+}
+
 setopt prompt_subst
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' stagedstr 'M' 
