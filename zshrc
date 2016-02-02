@@ -34,7 +34,7 @@ sshmount () {
 sshumount () {
     dirname=~/$1
     fusermount -u "${dirname}"
-    rm -ri $dirname
+    rmdir $dirname
 }
 
 setopt prompt_subst
