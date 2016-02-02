@@ -20,6 +20,12 @@ eval $(dircolors ~/.dircolors)
 
 autoload -U colors && colors
 
+normalize () {
+    for i do
+        awk 'FNR==NR{max=($2+0>max)?$2:max;next} {print $1,$2/max}' $i $i > $i.norm
+    done
+}
+
 setopt prompt_subst
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' stagedstr 'M' 
