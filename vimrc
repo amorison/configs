@@ -20,6 +20,7 @@ set relativenumber
 set number
 set cursorline
 set showcmd
+set t_Co=256
 colorscheme wombat256
 set tabstop=4
 set expandtab
