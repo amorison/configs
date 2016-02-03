@@ -16,29 +16,11 @@ linkcmd="ln -s $forceflag"
 # alias
 $linkcmd $PWD/alias ~/.alias
 
-# bspwm and sxhkd
-mkdir -p ~/.config/bspwm
-mkdir -p ~/.config/sxhkd
-chmod u+x bspwmrc
-$linkcmd $PWD/bspwmrc ~/.config/bspwm/bspwmrc
-$linkcmd $PWD/sxhkdrc ~/.config/sxhkd/sxhkdrc
-
 # LaTeX maker
 $linkcmd $PWD/latexmkrc ~/.latexmkrc
 
-# termite
-mkdir -p ~/.config/termite
-$linkcmd $PWD/termite ~/.config/termite/config
-
-# tint2
-mkdir -p ~/.config/tint2
-$linkcmd $PWD/tint2rc ~/.config/tint2/tint2rc
-
 # vim
 $linkcmd $PWD/vimrc ~/.vimrc
-
-# x11
-$linkcmd $PWD/xinitrc ~/.xinitrc
 
 # zsh
 $linkcmd $PWD/zcompdump ~/.zcompdump
