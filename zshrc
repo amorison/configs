@@ -44,7 +44,7 @@ zstyle ':vcs_info:*' unstagedstr 'M'
 zstyle ':vcs_info:*' stashedstr '$'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' actionformats '%F{5} %F{2}%b%F{3}|%F{1}%a%F{5} %f '
-zstyle ':vcs_info:*' formats '%F{3} %b  %F{2}%c%F{1}%u %F{6}%m%f'
+zstyle ':vcs_info:*' formats '%F{3}ᓯ %b  %F{2}%c%F{1}%u %F{6}%m%f'
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-stash
 zstyle ':vcs_info:*' enable git 
 +vi-git-untracked() {
