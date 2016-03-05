@@ -26,6 +26,8 @@ set tabstop=4
 set expandtab
 set softtabstop=4
 set shiftwidth=4
+set hlsearch
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 filetype plugin indent on
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor="lualatex"
