@@ -23,7 +23,4 @@ $linkcmd $PWD/latexmkrc ~/.latexmkrc
 $linkcmd $PWD/vimrc ~/.vimrc
 
 # zsh
-$linkcmd $PWD/zcompdump ~/.zcompdump
-$linkcmd $PWD/zprofile ~/.zprofile
-$linkcmd $PWD/zshenv ~/.zshenv
 $linkcmd $PWD/zshrc ~/.zshrc
