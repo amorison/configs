@@ -68,5 +68,8 @@ fi
 precmd () { vcs_info }
 #PROMPT='%F{5}[%F{2}%n%F{5}] %F{3}%3~ ${vcs_info_msg_0_} %f%# '
 
+typeset -U path
+path=(~/bin ~/.local/bin $path)
+
 PROMPT='  %{$fg_bold[green]%}%~   ${vcs_info_msg_0_} %f
 %{$fg_bold[red]%}%n%{$reset_color%}@%{$fg_bold[yellow]%}%M %{$reset_color%}%# '
