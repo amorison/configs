@@ -19,6 +19,9 @@ $linkcmd $PWD/alias ~/.alias
 # LaTeX maker
 $linkcmd $PWD/latexmkrc ~/.latexmkrc
 
+# tmux
+$linkcmd $PWD/tmux.conf ~/.tmux.conf
+
 # vim
 $linkcmd $PWD/vimrc ~/.vimrc
 
