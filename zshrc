@@ -43,6 +43,7 @@ sshumount () {
     rmdir $dirname
 }
 
+export EDITOR=vim
 setopt prompt_subst
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' stagedstr 'M' 
