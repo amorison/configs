@@ -78,5 +78,9 @@ precmd () { vcs_info }
 typeset -U path
 path=(~/bin ~/.local/bin $path)
 
-PROMPT='${ssh_info}  %{$fg_bold[green]%}%~   ${vcs_info_msg_0_} %f
-%{$fg_bold[red]%}%n%{$reset_color%}@%{$fg_bold[yellow]%}%M %{$reset_color%}%# '
+path_info='%{$fg_bold[green]%}%~%{$reset_color%}'
+git_info='%{$fg_bold[green]%}${vcs_info_msg_0_} %f%{$reset_color%}'
+usr_name='%{$fg_bold[red]%}%n%{$reset_color%}'
+machine='%{$fg_bold[yellow]%}%M %{$reset_color%}'
+PROMPT="${ssh_info}  ${path_info}   ${git_info}
+${usr_name}@${machine} %# "
