@@ -26,6 +26,12 @@ normalize () {
     done
 }
 
+if [[ -z "$SSH_CLIENT" ]]; then
+    ssh_info=""
+else
+    ssh_info="(ssh)"
+fi
+
 sshmount () {
     dirname=~/$1
     if [ -d "${dirname}" ]
@@ -72,5 +78,5 @@ precmd () { vcs_info }
 typeset -U path
 path=(~/bin ~/.local/bin $path)
 
-PROMPT='  %{$fg_bold[green]%}%~   ${vcs_info_msg_0_} %f
+PROMPT='${ssh_info}  %{$fg_bold[green]%}%~   ${vcs_info_msg_0_} %f
 %{$fg_bold[red]%}%n%{$reset_color%}@%{$fg_bold[yellow]%}%M %{$reset_color%}%# '
