@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -50,37 +57,11 @@ sshumount () {
 }
 
 export EDITOR=vim
-setopt prompt_subst
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' stagedstr 'M' 
-zstyle ':vcs_info:*' unstagedstr 'M' 
-zstyle ':vcs_info:*' stashedstr '$'
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' actionformats '%F{5} %F{2}%b%F{3}|%F{1}%a%F{5} %f '
-zstyle ':vcs_info:*' formats '%F{3}ᓯ %b  %F{2}%c%F{1}%u %F{6}%m%f'
-zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-stash
-zstyle ':vcs_info:*' enable git 
-+vi-git-untracked() {
-  if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
-        [[ $(git ls-files --other --directory --exclude-standard | sed q | wc -l | tr -d ' ') == 1 ]] ; then
-    hook_com[unstaged]+='%F{1}??%f'
-fi
-}
-+vi-git-stash() {
-  if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
-    hook_com[misc]="%F{4}$"
-  fi
-}
-
-precmd () { vcs_info }
-#PROMPT='%F{5}[%F{2}%n%F{5}] %F{3}%3~ ${vcs_info_msg_0_} %f%# '
 
 typeset -U path
 path=(~/bin ~/.local/bin $path)
 
-path_info='%{$fg_bold[green]%}%~%{$reset_color%}'
-git_info='%{$fg_bold[green]%}${vcs_info_msg_0_} %f%{$reset_color%}'
-usr_name='%{$fg_bold[red]%}%n%{$reset_color%}'
-machine='%{$fg_bold[yellow]%}%M%{$reset_color%}'
-PROMPT="${ssh_info}  ${path_info}   ${git_info}
-${usr_name}@${machine} %# "
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

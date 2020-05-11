@@ -27,3 +27,6 @@ $linkcmd $PWD/vimrc ~/.vimrc
 
 # zsh
 $linkcmd $PWD/zshrc ~/.zshrc
+
+# p10k
+$linkcmd $PWD/p10k.zsh ~/.p10k.zsh
