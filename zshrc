@@ -21,7 +21,6 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 source ~/.alias
 
 eval $(dircolors ~/.dircolors)
-. /etc/profile.d/vte.sh
 
 autoload -U colors && colors
 
