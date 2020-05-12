@@ -12,25 +12,20 @@ bindkey -e
 
 fpath+=~/.zfunc
 zstyle :compinstall filename "~/.zshrc"
-
 autoload -U compinit
 compinit
-
 source /usr/share/doc/pkgfile/command-not-found.zsh
-
-source ~/.alias
-
-# set LS_COLORS
-eval $(dircolors)
-
-autoload -U colors && colors
 
 autoload -Uz sshmount sshumount
 
-export EDITOR=vim
+eval $(dircolors)  # set LS_COLORS
+autoload -U colors && colors
 
 typeset -U path
 path=(~/bin ~/.local/bin $path)
+export EDITOR=vim
+source ~/.alias
+
 
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
