@@ -1,0 +1,10 @@
+# vim: filetype=zsh
+
+dirname=~/$1
+if [ -d "${dirname}" ]
+then
+    echo "${dirname} already exists, abort."
+else
+    mkdir "${dirname}"
+    sshfs -C $1:. "${dirname}"
+fi

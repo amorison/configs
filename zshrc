@@ -10,6 +10,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 bindkey -e
 
+fpath+=~/.zfunc
 zstyle :compinstall filename "~/.zshrc"
 
 autoload -U compinit
@@ -24,22 +25,7 @@ eval $(dircolors ~/.dircolors)
 
 autoload -U colors && colors
 
-sshmount () {
-    dirname=~/$1
-    if [ -d "${dirname}" ]
-    then
-        echo "${dirname} already exists, abort."
-    else
-        mkdir "${dirname}"
-        sshfs -C $1:. "${dirname}"
-    fi
-}
-
-sshumount () {
-    dirname=~/$1
-    fusermount -u "${dirname}"
-    rmdir $dirname
-}
+autoload -Uz sshmount sshumount
 
 export EDITOR=vim
 

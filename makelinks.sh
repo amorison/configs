@@ -30,3 +30,8 @@ $linkcmd $PWD/zshrc ~/.zshrc
 
 # p10k
 $linkcmd $PWD/p10k.zsh ~/.p10k.zsh
+
+# my zsh functions
+mkdir -p ~/.zfunc
+$linkcmd $PWD/zfunc/sshmount ~/.zfunc
+$linkcmd $PWD/zfunc/sshumount ~/.zfunc

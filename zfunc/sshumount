@@ -1,0 +1,5 @@
+# vim: filetype=zsh
+
+dirname=~/$1
+fusermount -u "${dirname}"
+rmdir $dirname
