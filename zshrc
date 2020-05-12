@@ -27,12 +27,6 @@ eval $(dircolors ~/.dircolors)
 
 autoload -U colors && colors
 
-normalize () {
-    for i do
-        awk 'FNR==NR{max=($2+0>max)?$2:max;next} {print $1,$2/max}' $i $i > $i.norm
-    done
-}
-
 sshmount () {
     dirname=~/$1
     if [ -d "${dirname}" ]
