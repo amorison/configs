@@ -20,7 +20,8 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 
 source ~/.alias
 
-eval $(dircolors ~/.dircolors)
+# set LS_COLORS
+eval $(dircolors)
 
 autoload -U colors && colors
 
