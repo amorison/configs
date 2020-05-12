@@ -33,12 +33,6 @@ normalize () {
     done
 }
 
-if [[ -z "$SSH_CLIENT" ]]; then
-    ssh_info=""
-else
-    ssh_info="(ssh)"
-fi
-
 sshmount () {
     dirname=~/$1
     if [ -d "${dirname}" ]
