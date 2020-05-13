@@ -14,7 +14,10 @@ fpath+=~/.zfunc
 zstyle :compinstall filename "~/.zshrc"
 autoload -U compinit
 compinit
-source /usr/share/doc/pkgfile/command-not-found.zsh
+
+function safesource () if [ -f "$1" ]; then source $1; fi
+
+safesource /usr/share/doc/pkgfile/command-not-found.zsh
 
 autoload -Uz sshmount sshumount
 
@@ -37,6 +40,7 @@ export PATH
 export EDITOR=vim
 source ~/.alias
 
+unfunction safesource
 
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
