@@ -21,8 +21,19 @@ autoload -Uz sshmount sshumount
 eval $(dircolors)  # set LS_COLORS
 autoload -U colors && colors
 
+typeset -a add_to_path
+add_to_path=(~/.local/bin
+             ~/bin
+             ~/.cargo/bin)
 typeset -U path
-path=(~/bin ~/.local/bin $path)
+for dirname in ${add_to_path}; do
+    if [ -d "${dirname}" ]
+    then
+        path=(${dirname} ${path})
+    fi
+done
+unset add_to_path
+export PATH
 export EDITOR=vim
 source ~/.alias
 
