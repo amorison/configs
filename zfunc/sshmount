@@ -3,7 +3,8 @@
 dirname=~/$1
 if [ -d "${dirname}" ]
 then
-    echo "${dirname} already exists, abort."
+    >&2 echo "${dirname} already exists, abort."
+    return 1
 else
     mkdir "${dirname}"
     sshfs -C $1:. "${dirname}"
