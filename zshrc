@@ -23,8 +23,7 @@ if [ -r ~/.ssh/config ]; then
     unset h
 fi
 
-autoload -U compinit
-compinit
+autoload -Uz compinit && compinit
 
 function safesource () if [ -f "$1" ]; then source $1; fi
 
@@ -33,7 +32,6 @@ safesource /usr/share/doc/pkgfile/command-not-found.zsh
 autoload -Uz sshmount sshumount
 
 eval $(dircolors)  # set LS_COLORS
-autoload -U colors && colors
 
 typeset -a add_to_path
 add_to_path=(~/.local/bin
@@ -41,8 +39,7 @@ add_to_path=(~/.local/bin
              ~/.cargo/bin)
 typeset -U path
 for dirname in ${add_to_path}; do
-    if [ -d "${dirname}" ]
-    then
+    if [ -d "${dirname}" ]; then
         path=(${dirname} ${path})
     fi
 done
@@ -54,6 +51,5 @@ source ~/.alias
 unfunction safesource
 
 source ~/.p10ktheme
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
