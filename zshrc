@@ -8,6 +8,9 @@ fi
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
+setopt hist_find_no_dups
+setopt hist_ignore_dups
+
 bindkey -e
 
 fpath+=~/.zfunc
