@@ -12,6 +12,14 @@ bindkey -e
 
 fpath+=~/.zfunc
 zstyle :compinstall filename "~/.zshrc"
+
+# completion of hostname uses only ssh config hosts
+if [ -r ~/.ssh/config ]; then
+    h=(${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+    zstyle ':completion:*:hosts' hosts $h
+    unset h
+fi
+
 autoload -U compinit
 compinit
 
