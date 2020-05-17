@@ -50,6 +50,8 @@ source ~/.alias
 
 unfunction safesource
 
+source ~/.zshsynthl
+
 source ~/.p10ktheme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

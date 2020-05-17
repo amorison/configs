@@ -62,6 +62,12 @@ $linkcmd $p10ktheme ~/.p10ktheme
 # personal configuration
 $linkcmd $PWD/p10k.zsh ~/.p10k.zsh
 
+# zsh syntax highlighting
+zshsynthl=$(checkinstall \
+    '/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' \
+    'https://github.com/zsh-users/zsh-syntax-highlighting.git')
+$linkcmd $zshsynthl ~/.zshsynthl
+
 # my zsh functions
 mkdir -p ~/.zfunc
 $linkcmd $PWD/zfunc/sshmount ~/.zfunc
