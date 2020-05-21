@@ -1,6 +1,6 @@
-alias grep='grep --color='\''auto'\'
+# vim: filetype=sh
+alias grep='grep --color=auto'
 alias ll='ls -lh'
 alias lt='ls -lrth'
 alias la='ls -lah'
-alias ls='ls --color='\''auto'\'
-alias sshkey='eval `keychain --eval --agents ssh id_rsa`'
+alias ls='ls --color=auto'
