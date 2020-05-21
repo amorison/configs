@@ -6,6 +6,7 @@ set cursorline
 set showcmd
 set t_Co=256
 colorscheme wombat256
+highlight CursorLineNr cterm=bold
 set tabstop=4
 set expandtab
 set softtabstop=4
