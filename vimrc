@@ -7,6 +7,8 @@ set showcmd
 set t_Co=256
 colorscheme wombat256
 highlight CursorLineNr cterm=bold
+highlight At80thCol ctermbg=52
+match At80thCol /\%>79v.*\n\@!\%<81v/
 set tabstop=4
 set expandtab
 set softtabstop=4
