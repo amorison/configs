@@ -17,6 +17,6 @@ set smartindent
 set hlsearch
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 filetype plugin indent on
-autocmd BufEnter * lcd %:p:h
+autocmd BufEnter * if &buftype!="terminal" | lcd %:p:h | endif
 nnoremap <LocalLeader>o :OpenIndentToCursorCol<CR>
 command! OpenIndentToCursorCol call append('.', repeat(' ', getcurpos()[2] -1)) | exe "normal j" | startinsert!
