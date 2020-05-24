@@ -4,12 +4,20 @@ set relativenumber
 set number
 set cursorline
 set showcmd
+
 set t_Co=256
 colorscheme wombat256
 highlight Search cterm=bold ctermbg=100 ctermfg=16
 highlight CursorLineNr cterm=bold
+" dark-red bg at 80th column
 highlight At80thCol ctermbg=52
 match At80thCol /\%>79v.*\n\@!\%<81v/
+" more contrasted colors in diff
+highlight diffAdded ctermfg=34
+highlight diffRemoved ctermfg=124
+" to display the highlight group of a word
+command SynID  echo synIDattr(synID(line("."), col("."), 1), "name")
+
 set tabstop=4
 set expandtab
 set softtabstop=4
