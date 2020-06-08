@@ -7,7 +7,7 @@ set showcmd
 
 set t_Co=256
 colorscheme wombat256
-highlight Search cterm=bold ctermbg=100 ctermfg=16
+highlight Search cterm=bold ctermbg=150 ctermfg=16
 highlight CursorLineNr cterm=bold
 " dark-red bg at 80th column
 highlight At80thCol ctermbg=52
