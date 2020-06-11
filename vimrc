@@ -11,7 +11,10 @@ highlight Search cterm=bold ctermbg=150 ctermfg=16
 highlight CursorLineNr cterm=bold
 " dark-red bg at 80th column
 highlight At80thCol ctermbg=52
-match At80thCol /\%>79v.*\n\@!\%<81v/
+augroup custom_hi
+    autocmd!
+    autocmd VimEnter,WinEnter * match At80thCol /\%>79v.*\n\@!\%<81v/
+augroup END
 " more contrasted colors in diff
 highlight diffAdded ctermfg=34
 highlight diffRemoved ctermfg=124
