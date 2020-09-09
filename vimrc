@@ -5,18 +5,23 @@ set number
 set cursorline
 set showcmd
 
-colorscheme wombat256
-highlight Search cterm=bold ctermbg=150 ctermfg=16
-highlight CursorLineNr cterm=bold
-" dark-red bg at 80th column
-highlight At80thCol ctermbg=52
+function! CustomHI() abort
+    highlight Search cterm=bold ctermbg=150 ctermfg=16
+    highlight CursorLineNr cterm=bold
+    " dark-red bg at 80th column
+    highlight At80thCol ctermbg=52
+    " more contrasted colors in diff
+    highlight diffAdded ctermfg=34
+    highlight diffRemoved ctermfg=124
+endfunction
+
 augroup custom_hi
     autocmd!
     autocmd VimEnter,WinEnter * match At80thCol /\%>79v.*\n\@!\%<81v/
+    autocmd ColorScheme * call CustomHI()
 augroup END
-" more contrasted colors in diff
-highlight diffAdded ctermfg=34
-highlight diffRemoved ctermfg=124
+colorscheme wombat256
+
 " to display the highlight group of a word
 command SynID  echo synIDattr(synID(line("."), col("."), 1), "name")
 
