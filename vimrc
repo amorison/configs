@@ -25,7 +25,7 @@ set tabstop=4
 set expandtab
 set softtabstop=4
 set shiftwidth=4
-set smartindent
+set autoindent
 set hlsearch
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 filetype plugin indent on
