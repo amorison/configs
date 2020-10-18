@@ -39,3 +39,9 @@ augroup cd_to_bufpath
 augroup END
 nnoremap <LocalLeader>o :OpenIndentToCursorCol<CR>
 command! OpenIndentToCursorCol call append('.', repeat(' ', getcurpos()[2] -1)) | exe "normal j" | startinsert!
+
+" plugin management using junegunn/vim-plug
+" run :PlugUpdate to install/update plugins
+call plug#begin('~/.vim/plugged')
+Plug 'ervandew/supertab'
+call plug#end()

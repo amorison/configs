@@ -19,5 +19,7 @@ Powerlevel10k is cloned/pulled by `./makelinks.sh`.
 The `wombat256` color scheme for Vim can be found here:
 http://www.vim.org/scripts/script.php?script_id=2465
 
-The supertab plugin can be found here:
-http://www.vim.org/scripts/script.php?script_id=1643
+Plugins are managed with https://github.com/junegunn/vim-plug
+
+Run `:PlugUpdate` to install/update plugins, `:PlugUpgrade` to update vim-plug
+itself.
