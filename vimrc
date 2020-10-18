@@ -10,6 +10,7 @@ function! CustomHI() abort
     highlight CursorLineNr cterm=bold
     " dark-red bg at 80th column
     highlight At80thCol ctermbg=52
+    highlight LspWarningHighlight ctermfg=247 ctermbg=52
     " more contrasted colors in diff
     highlight diffAdded ctermfg=34
     highlight diffRemoved ctermfg=124
