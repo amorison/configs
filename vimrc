@@ -43,5 +43,30 @@ command! OpenIndentToCursorCol call append('.', repeat(' ', getcurpos()[2] -1)) 
 " plugin management using junegunn/vim-plug
 " run :PlugUpdate to install/update plugins
 call plug#begin('~/.vim/plugged')
-Plug 'ervandew/supertab'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 call plug#end()
+
+" tab completion
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+let g:asyncomplete_auto_popup = 0
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" folding with indent, too slow through LSP with LaTeX
+let g:lsp_fold_enabled = 0
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
