@@ -50,7 +50,10 @@ $linkcmd $PWD/tmux.conf ~/.tmux.conf
 
 # vim
 $linkcmd $PWD/vimrc ~/.vimrc
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+curl --fail --location --create-dirs \
+    -o ~/.vim/colors/wombat256.vim \
+    https://raw.githubusercontent.com/vim-scripts/wombat256.vim/26fa8528ff1ac33a5b5039133968a3ee1856890f/colors/wombat256.vim \
+    -o ~/.vim/autoload/plug.vim \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # zsh
