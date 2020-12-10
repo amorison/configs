@@ -39,6 +39,9 @@ checkinstall () {
     echo "${filetosource}"
 }
 
+# alacritty
+$linkcmd $PWD/alacritty.yml ~/.alacritty.yml
+
 # alias
 $linkcmd $PWD/alias ~/.alias
 
