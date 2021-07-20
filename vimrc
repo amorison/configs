@@ -41,6 +41,9 @@ augroup END
 nnoremap <LocalLeader>o :OpenIndentToCursorCol<CR>
 command! OpenIndentToCursorCol call append('.', repeat(' ', getcurpos()[2] -1)) | exe "normal j" | startinsert!
 
+set wildmenu
+set wildmode=longest,full
+
 " plugin management using junegunn/vim-plug
 " run :PlugUpdate to install/update plugins
 call plug#begin('~/.vim/plugged')
