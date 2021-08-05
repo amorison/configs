@@ -8,6 +8,7 @@ set showcmd
 function! CustomHI() abort
     highlight Search cterm=bold ctermbg=150 ctermfg=16
     highlight CursorLineNr cterm=bold
+    highlight SignColumn ctermbg=0
     " dark-red bg at 80th column
     highlight At80thCol ctermbg=52
     highlight LspWarningHighlight ctermfg=247 ctermbg=52
