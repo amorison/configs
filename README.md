@@ -14,6 +14,15 @@ https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel1
 
 Powerlevel10k is cloned/pulled by `./makelinks.sh`.
 
+## Bash stuff
+
+This is minimal to have a decent prompt when stuck with bash. The configuration
+uses the [Starship prompt](https://starship.rs/) that you can install with
+
+```shell
+sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -b ~/.local/bin
+```
+
 ## Vim stuff
 
 Plugins are managed with https://github.com/junegunn/vim-plug

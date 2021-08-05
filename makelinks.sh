@@ -61,6 +61,9 @@ curl --fail --location --create-dirs \
     -o ~/.vim/autoload/plug.vim \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+# bash
+$linkcmd $PWD/bashrc ~/.bashrc
+
 # zsh
 $linkcmd $PWD/zshrc ~/.zshrc
 
