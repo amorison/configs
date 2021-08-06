@@ -62,7 +62,9 @@ curl --fail --location --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # bash
+mkdir -p ~/.config
 $linkcmd $PWD/bashrc ~/.bashrc
+$linkcmd -t ~/.config $PWD/starship.toml
 
 # zsh
 $linkcmd $PWD/zshrc ~/.zshrc
