@@ -389,7 +389,7 @@
       # Otherwise show the first 12 … the last 12.
       # Tip: To always show local branch name in full without truncation, delete the next line.
       # (( $#branch > 32 )) && branch[13,-13]="…"  # <-- this line
-      res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
+      res+="%B${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}%b"
     fi
 
     if [[ -n $VCS_STATUS_TAG
@@ -402,7 +402,7 @@
       # Otherwise show the first 12 … the last 12.
       # Tip: To always show tag name in full without truncation, delete the next line.
       # (( $#tag > 32 )) && tag[13,-13]="…"  # <-- this line
-      res+="${meta}#${clean}${tag//\%/%%}"
+      res+="%B${meta}#${clean}${tag//\%/%%}%b"
     fi
 
     # Display the current Git commit if there is no branch and no tag.
