@@ -7,7 +7,7 @@ function! s:ExpandTexEnv()
     elseif l:cword ==# "figure"
         execute "normal! o\\includegraphics{}\<cr>\\caption{}\<cr>\\label{fig:}\<esc>2k$h"
     elseif l:cword ==# "frame"
-        execute "normal! o\\frametitle{}\<esc>2k$h"
+        execute "normal! o\\frametitle{}\<esc>h"
     elseif l:cword ==# "minipage"
         execute "normal! A{\\textwidth}\<esc>%"
     endif
