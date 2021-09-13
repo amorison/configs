@@ -35,7 +35,6 @@ eval $(dircolors)  # set LS_COLORS
 
 typeset -a add_to_path
 add_to_path=(~/.local/bin
-             ~/bin
              ~/.cargo/bin)
 typeset -U path
 for dirname in ${add_to_path}; do

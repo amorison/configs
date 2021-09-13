@@ -10,7 +10,7 @@ source_if_present() { [[ -f "$1" ]] && source $1; }
 source_if_present /etc/bash_completion
 source_if_present /usr/share/lmod/lmod/init/bash
 
-export PATH=~/bin:~/.local/bin:$PATH
+export PATH=~/.local/bin:$PATH
 
 if [[ $- == *i* ]]; then
     bind 'set show-all-if-ambiguous on'
