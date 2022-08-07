@@ -41,3 +41,12 @@ and make sure the following option is `true`:
 ```text
 include-system-site-packages = true
 ```
+
+## pacman hooks
+
+They are useful on an arch system:
+
+```shell
+# mkdir -p /etc/pacman.d/hooks
+# cp pacman/hooks/*.hook /etc/pacman.d/hooks
+```
