@@ -50,3 +50,5 @@ They are useful on an arch system:
 # mkdir -p /etc/pacman.d/hooks
 # cp pacman/hooks/*.hook /etc/pacman.d/hooks
 ```
+
+`pacman-contrib`, providing `paccache` is needed.
