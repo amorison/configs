@@ -139,6 +139,8 @@ lspconfig.rust_analyzer.setup { capabilities = capabilities, }
 
 lspconfig.cmake.setup { capabilities = capabilities, }
 
+lspconfig.clangd.setup { capabilities = capabilities }
+
 lspconfig.fortls.setup {
     capabilities = capabilities,
     cmd = {
@@ -158,3 +160,5 @@ lspconfig.pylsp.setup {
         },
     },
 }
+
+lspconfig.texlab.setup { capabilities = capabilities }
