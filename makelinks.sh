@@ -61,6 +61,9 @@ curl --fail --location --create-dirs \
     -o ~/.vim/autoload/plug.vim \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+mkdir -p ~/.config/nvim
+$linkcmd $PWD/nvim.lua ~/.config/nvim/init.lua
+
 # bash
 mkdir -p ~/.config
 $linkcmd $PWD/bashrc ~/.bashrc
