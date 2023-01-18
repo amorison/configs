@@ -2,7 +2,7 @@ export HISTCONTROL=ignoredups
 export HISTCONTROL=ignoreboth
 
 export LANG=C
-export EDITOR=vim
+export EDITOR=nvim
 
 source ~/.alias
 

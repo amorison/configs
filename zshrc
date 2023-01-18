@@ -44,7 +44,7 @@ for dirname in ${add_to_path}; do
 done
 unset add_to_path
 export PATH
-export EDITOR=vim
+export EDITOR=nvim
 source ~/.alias
 
 unfunction safesource
