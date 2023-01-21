@@ -1,28 +1,51 @@
 # configs
-various config files
+
+Various config files.
 
 The script `sync.py` (Python 3.8+) installs and creates soft links to config
 files in the appropriate locations.
 
 Use the `-f` option `./sync.py -f` to remove existing files before linking.
 
-## Zsh stuff
+## Stuff to install manually
 
-Configure your terminal to use the recommended font here:
-https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k
+### Neovim
 
-Powerlevel10k is cloned/pulled by `./sync.py`.
+With your package manager or [from the release
+page](https://github.com/neovim/neovim/releases/tag/stable)
 
-## Bash stuff
+The following LSP servers are used:
 
-This is minimal to have a decent prompt when stuck with bash. The configuration
-uses the [Starship prompt](https://starship.rs/) that you can install with
+- Rust analyzer, available through `rustup`
+- `python-language-server[all]` along with `pyls-mypy`, available on PyPI
+- `clangd`, usually distributed as part of clang
+- `fortls`, available on PyPI
+- `cmake-language-server`, available on PyPI
+- https://github.com/latex-lsp/texlab
+- https://github.com/sumneko/lua-language-server
+
+### Starship
+
+With your package manager or the installation script:
 
 ```shell
 sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -b ~/.local/bin
 ```
 
-## Vim stuff
+### Terminal font
+
+Configure your terminal to use the recommended font here:
+https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k
+
+## Other remarks
+
+### Neovim
+
+Run `:PackerSync` to install/update plugins. Packer is installed and synced
+automatically when starting `nvim` for the first time on a fresh install with
+this config.
+
+### Vim
 
 Plugins are managed with https://github.com/junegunn/vim-plug
 
@@ -41,7 +64,7 @@ and make sure the following option is `true`:
 include-system-site-packages = true
 ```
 
-## pacman hooks
+### pacman hooks
 
 They are useful on an arch system:
 
@@ -50,4 +73,4 @@ They are useful on an arch system:
 # cp pacman/hooks/*.hook /etc/pacman.d/hooks
 ```
 
-`pacman-contrib`, providing `paccache` is needed.
+`pacman-contrib`, providing `paccache`, is needed.
