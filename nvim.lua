@@ -26,6 +26,10 @@ require('packer').startup(function()
 
     use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/vim-vsnip'
+    use {
+        'glacambre/firenvim',
+        run = function() vim.fn['firenvim#install'](0) end
+    }
 end)
 
 local hi_grp = vim.api.nvim_create_augroup("custom_hi", { clear = true })
@@ -42,7 +46,11 @@ require('nightfox').setup({
         },
     }
 })
-vim.cmd("colorscheme nightfox")
+if vim.g.started_by_firenvim then
+    vim.cmd("colorscheme dayfox")
+else
+    vim.cmd("colorscheme nightfox")
+end
 
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
