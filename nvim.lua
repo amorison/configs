@@ -101,8 +101,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 require("fidget").setup()
 
 local cmp = require('cmp')
+local cmp_types = require("cmp.types")
 
 cmp.setup({
+    preselect = cmp_types.cmp.PreselectMode.None,
     snippet = {
         expand = function(args) vim.fn["vsnip#anonymous"](args.body) end,
     },
