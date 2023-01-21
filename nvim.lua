@@ -69,6 +69,14 @@ else
     vim.cmd("colorscheme nightfox")
 end
 
+vim.g.firenvim_config = {
+    localSettings = {
+        [".*"] = {
+            takeover = "never",
+        },
+    },
+}
+
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and
