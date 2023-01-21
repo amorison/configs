@@ -52,18 +52,6 @@ Plugins are managed with https://github.com/junegunn/vim-plug
 Run `:PlugUpdate` to install/update plugins, `:PlugUpgrade` to update vim-plug
 itself.
 
-For `pylsp` to see system wide packages, edit
-
-```shell
-~/.local/share/vim-lsp-settings/servers/pylsp-all/venv/pyvenv.cfg
-```
-
-and make sure the following option is `true`:
-
-```text
-include-system-site-packages = true
-```
-
 ### pacman hooks
 
 They are useful on an arch system:

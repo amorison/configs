@@ -91,11 +91,6 @@ if __name__ == "__main__":
 
     remotes = [
         RemoteFile(
-            url=("https://raw.githubusercontent.com/vim-scripts/wombat256.vim/"
-                 "26fa8528ff1ac33a5b5039133968a3ee1856890f/colors/wombat256.vim"),
-            local_path=home / ".vim/colors/wombat256.vim",
-        ),
-        RemoteFile(
             url="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim",
             local_path=home / ".vim/autoload/plug.vim",
         ),
