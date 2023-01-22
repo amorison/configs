@@ -17,7 +17,7 @@ page](https://github.com/neovim/neovim/releases/tag/stable)
 The following LSP servers are used:
 
 - Rust analyzer, available through `rustup`
-- `python-language-server[all]` along with `pyls-mypy`, available on PyPI
+- `python-lsp-server[all]` along with `pylsp-mypy`, available on PyPI
 - `clangd`, usually distributed as part of clang
 - `fortls`, available on PyPI
 - `cmake-language-server`, available on PyPI
