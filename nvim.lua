@@ -32,7 +32,7 @@ local packer_bootstrap = ensure_packer()
 local use = require('packer').use
 require('packer').startup(function()
     use 'wbthomason/packer.nvim'
-    use "EdenEast/nightfox.nvim"
+    use 'marko-cerovac/material.nvim'
     use 'neovim/nvim-lspconfig'
     use 'j-hui/fidget.nvim'
 
@@ -61,19 +61,30 @@ vim.api.nvim_create_autocmd({"VimEnter", "WinEnter"}, {
     group = hi_grp,
 })
 
-require('nightfox').setup({
-    groups = {
-        nightfox = {
-            MatchParen = { bg = "palette.red.dim", fg = "palette.orange" },
-            At80thCol = { bg = "#000040" },
-        },
-    }
+require('material').setup({
+    contrast = {
+        floating_windows = true,
+        non_current_windows = true,
+    },
+    plugins = {
+        "nvim-cmp",
+    },
+    disable = {
+        colored_cursor = true,
+    },
+    custom_highlights = {
+        String = { fg = "#81b29a" },
+        diffAdded = { fg = "#81b29a" },
+        MatchParen = { bg = "#aa435c", fg = "#f4a261" },
+        At80thCol = { bg = "#000040" },
+    },
 })
 if vim.g.started_by_firenvim then
-    vim.cmd("colorscheme dayfox")
+    vim.g.material_style = "lighter"
 else
-    vim.cmd("colorscheme nightfox")
+    vim.g.material_style = "darker"
 end
+vim.cmd("colorscheme material")
 
 vim.g.firenvim_config = {
     localSettings = {
