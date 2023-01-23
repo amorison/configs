@@ -63,11 +63,15 @@ vim.api.nvim_create_autocmd({"VimEnter", "WinEnter"}, {
     group = hi_grp,
 })
 
-require("gitsigns").setup()
+require("gitsigns").setup({
+    current_line_blame = true,
+    current_line_blame_formatter = "<abbrev_sha>, <author_time:%Y-%m-%d> - <summary>",
+})
 
 require('material').setup({
     contrast = {
         floating_windows = true,
+        cursor_line = true,
         non_current_windows = true,
     },
     plugins = {
