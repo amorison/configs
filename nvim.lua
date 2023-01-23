@@ -36,6 +36,8 @@ require('packer').startup(function()
     use 'neovim/nvim-lspconfig'
     use 'j-hui/fidget.nvim'
 
+    use 'lewis6991/gitsigns.nvim'
+
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-nvim-lsp-signature-help'
     use 'hrsh7th/cmp-buffer'
@@ -61,12 +63,15 @@ vim.api.nvim_create_autocmd({"VimEnter", "WinEnter"}, {
     group = hi_grp,
 })
 
+require("gitsigns").setup()
+
 require('material').setup({
     contrast = {
         floating_windows = true,
         non_current_windows = true,
     },
     plugins = {
+        "gitsigns",
         "nvim-cmp",
     },
     disable = {
