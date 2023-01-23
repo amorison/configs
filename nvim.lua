@@ -65,6 +65,9 @@ vim.api.nvim_create_autocmd({"VimEnter", "WinEnter"}, {
 
 require("gitsigns").setup({
     current_line_blame = true,
+    current_line_blame_opts = {
+        virt_text_pos = "right_align",
+    },
     current_line_blame_formatter = "<abbrev_sha>, <author_time:%Y-%m-%d> - <summary>",
 })
 
