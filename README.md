@@ -11,10 +11,10 @@ Use the `-f` option `./sync.py -f` to remove existing files before linking.
 
 ### Neovim
 
-With your package manager or [from the release
-page](https://github.com/neovim/neovim/releases/tag/stable)
+Install neovim with your package manager _before_ running `sync.py`.  If `nvim`
+is not in your `$PATH`, the script installs it.
 
-The following LSP servers are used:
+The following LSP servers are used and need to be installed:
 
 - Rust analyzer, available through `rustup`
 - `python-lsp-server[all]` along with `pylsp-mypy`, available on PyPI

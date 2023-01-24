@@ -7,8 +7,10 @@ from pathlib import Path
 from os import PathLike
 from typing import Optional, Union
 from urllib.request import urlopen
+import hashlib
 import shlex
 import shutil
+import stat
 import subprocess
 
 
@@ -44,6 +46,65 @@ class RemoteFile:
             with urlopen(self.url) as response:
                 with self.local_path.open("wb") as local:
                     shutil.copyfileobj(response, local)
+
+
+@dataclass(frozen=True)
+class NvimApp:
+    local_dir: Path
+    image_url: str = "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
+    sha256_url: str = (
+        "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage.sha256sum"
+    )
+
+    @property
+    def _appimage_path(self) -> Path:
+        return self.local_dir / "nvim.appimage"
+
+    @property
+    def _appimage(self) -> RemoteFile:
+        return RemoteFile(
+            url=self.image_url,
+            local_path=self._appimage_path,
+        )
+
+    @property
+    def _sha256_path(self) -> Path:
+        return self.local_dir / "nvim.appimage.sha256sum"
+
+    @property
+    def _sha256(self) -> RemoteFile:
+        return RemoteFile(
+            url=self.sha256_url,
+            local_path=self._sha256_path,
+        )
+
+    def download(self, force: bool) -> Path:
+        """Fetch nvim app, return path of executable."""
+        print("Downloading nvim...")
+        self.local_dir.mkdir(parents=True, exist_ok=True)
+        self._appimage.download(force)
+        self._sha256.download(force)
+        sha256_expected = self._sha256_path.read_text().split()[0]
+        sha256 = hashlib.sha256()
+        sha256.update(self._appimage_path.read_bytes())
+        if sha256.hexdigest() != sha256_expected:
+            raise RuntimeError("sha256 of nvim doesn't match")
+        stats = self._appimage_path.stat()
+        self._appimage_path.chmod(stats.st_mode | stat.S_IXUSR)
+        bare_img = subprocess.run(
+            args=[f"{self._appimage_path}", "--version"],
+            capture_output=True,
+        )
+        if bare_img.returncode == 0:
+            return self._appimage_path
+        print("    extracting image...")
+        subprocess.run(
+            args=[f"./{self._appimage_path.name}", "--appimage-extract"],
+            check=True,
+            capture_output=True,
+            cwd=self.local_dir,
+        )
+        return self.local_dir / "squashfs-root/usr/bin/nvim"
 
 
 @dataclass(frozen=True)
@@ -140,6 +201,10 @@ if __name__ == "__main__":
         ),
     )
     links.append(Symlink(path=home / ".zshsynthl", target=zsh_hl.fetch()))
+
+    if shutil.which("nvim") is None:
+        nvim = NvimApp(local_dir=Path(".nvim")).download(args.force)
+        links.append(Symlink(path=home / ".local/bin/nvim", target=nvim))
 
     for link in links:
         link.create(force=args.force)
