@@ -32,7 +32,7 @@ local packer_bootstrap = ensure_packer()
 local use = require('packer').use
 require('packer').startup(function()
     use 'wbthomason/packer.nvim'
-    use 'marko-cerovac/material.nvim'
+    use 'rebelot/kanagawa.nvim'
     use 'neovim/nvim-lspconfig'
     use 'j-hui/fidget.nvim'
 
@@ -71,32 +71,19 @@ require("gitsigns").setup({
     current_line_blame_formatter = "<abbrev_sha>, <author_time:%Y-%m-%d> - <summary>",
 })
 
-require('material').setup({
-    contrast = {
-        floating_windows = true,
-        cursor_line = true,
-        non_current_windows = true,
-    },
-    plugins = {
-        "gitsigns",
-        "nvim-cmp",
-    },
-    disable = {
-        colored_cursor = true,
-    },
-    custom_highlights = {
-        String = { fg = "#81b29a" },
-        diffAdded = { fg = "#81b29a" },
+require('kanagawa').setup({
+    dimInactive = true,
+    overrides = {
         MatchParen = { bg = "#aa435c", fg = "#f4a261" },
         At80thCol = { bg = "#000040" },
     },
 })
 if vim.g.started_by_firenvim then
-    vim.g.material_style = "lighter"
+    vim.g.background = "light"
 else
-    vim.g.material_style = "darker"
+    vim.g.background = "dark"
 end
-vim.cmd("colorscheme material")
+vim.cmd("colorscheme kanagawa")
 
 vim.g.firenvim_config = {
     localSettings = {
