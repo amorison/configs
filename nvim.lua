@@ -79,9 +79,7 @@ require('kanagawa').setup({
     },
 })
 if vim.g.started_by_firenvim then
-    vim.g.background = "light"
-else
-    vim.g.background = "dark"
+    vim.o.background = "light"
 end
 vim.cmd("colorscheme kanagawa")
 
