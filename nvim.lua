@@ -33,6 +33,10 @@ local use = require('packer').use
 require('packer').startup(function()
     use 'wbthomason/packer.nvim'
     use 'rebelot/kanagawa.nvim'
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    }
     use 'neovim/nvim-lspconfig'
     use 'j-hui/fidget.nvim'
 
@@ -69,6 +73,16 @@ require("gitsigns").setup({
         virt_text_pos = "right_align",
     },
     current_line_blame_formatter = "<abbrev_sha>, <author_time:%Y-%m-%d> - <summary>",
+})
+
+require("lualine").setup({
+    sections = {
+        lualine_b = {'branch', 'diff'},
+        lualine_x = {'diagnostics'},
+    },
+    inactive_sections = {
+        lualine_x = {'diagnostics', 'location'},
+    },
 })
 
 require('kanagawa').setup({
