@@ -2,16 +2,16 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from pathlib import Path
-from os import PathLike
-from typing import Optional, Union
-from urllib.request import urlopen
 import hashlib
 import shlex
 import shutil
 import stat
 import subprocess
+from dataclasses import dataclass
+from os import PathLike
+from pathlib import Path
+from typing import Optional, Union
+from urllib.request import urlopen
 
 
 @dataclass(frozen=True)
@@ -51,10 +51,10 @@ class RemoteFile:
 @dataclass(frozen=True)
 class NvimApp:
     local_dir: Path
-    image_url: str = "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
-    sha256_url: str = (
-        "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage.sha256sum"
+    image_url: str = (
+        "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
     )
+    sha256_url: str = "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage.sha256sum"
 
     @property
     def _appimage_path(self) -> Path:
@@ -143,9 +143,11 @@ class FileInGitRepo:
 
 if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--force", "-f", action="store_true", help="replace existing files")
+        "--force", "-f", action="store_true", help="replace existing files"
+    )
     args = parser.parse_args()
 
     home = Path.home()
@@ -164,24 +166,22 @@ if __name__ == "__main__":
         Symlink(path=home / ".alacritty.yml", target="alacritty.yml"),
         Symlink(path=home / ".alias", target="alias"),
         Symlink(path=home / ".tmux.conf", target="tmux.conf"),
-
         # bash
         Symlink(path=home / ".bashrc", target="bashrc"),
         Symlink(path=home / ".config/starship.toml", target="starship.toml"),
-
         # latex
         Symlink(path=home / ".latexmkrc", target="latexmkrc"),
-
         # nvim
         Symlink(path=home / ".config/nvim/init.lua", target="nvim.lua"),
         Symlink(path=home / ".vimrc", target="vimrc"),
         Symlink(path=home / ".vim/ftplugin/tex.vim", target="tex.vim"),
-
         # zsh
         Symlink(path=home / ".zshrc", target="zshrc"),
         Symlink(path=home / ".p10k.zsh", target="p10k.zsh"),  # config of p10k
-        *(Symlink(path=home / ".zfunc" / tgt.name, target=tgt)
-          for tgt in Path("zfunc").iterdir()),
+        *(
+            Symlink(path=home / ".zfunc" / tgt.name, target=tgt)
+            for tgt in Path("zfunc").iterdir()
+        ),
     ]
 
     zsh_gits = Path(".zsh_gits")

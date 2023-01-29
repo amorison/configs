@@ -13,9 +13,9 @@ vim.o.shiftwidth = 4
 vim.o.list = true
 vim.o.listchars = "tab:•·❯,trail:•"
 
-vim.keymap.set('n', '<Space>', '<Nop>', {silent = true, noremap = true})
+vim.keymap.set('n', '<Space>', '<Nop>', { silent = true, noremap = true })
 vim.g.mapleader = ' '
-vim.keymap.set('n', '<Leader><Space>', ':nohlsearch<Bar>:echo<CR>', {silent = true, noremap = true})
+vim.keymap.set('n', '<Leader><Space>', ':nohlsearch<Bar>:echo<CR>', { silent = true, noremap = true })
 
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
@@ -24,9 +24,9 @@ vim.g.loaded_perl_provider = 0
 
 local ensure_packer = function()
     local fn = vim.fn
-    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
     if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+        fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
         vim.cmd("packadd packer.nvim")
         return true
     end
@@ -68,7 +68,7 @@ require('packer').startup(function()
 end)
 
 local hi_grp = vim.api.nvim_create_augroup("custom_hi", { clear = true })
-vim.api.nvim_create_autocmd({"VimEnter", "WinEnter"}, {
+vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter" }, {
     command = [[match At80thCol /\%>79v.*\n\@!\%<81v/]],
     group = hi_grp,
 })
@@ -83,11 +83,11 @@ require("gitsigns").setup({
 
 require("lualine").setup({
     sections = {
-        lualine_b = {'branch', 'diff'},
-        lualine_x = {'diagnostics'},
+        lualine_b = { 'branch', 'diff' },
+        lualine_x = { 'diagnostics' },
     },
     inactive_sections = {
-        lualine_x = {'diagnostics', 'location'},
+        lualine_x = { 'diagnostics', 'location' },
     },
 })
 
@@ -125,14 +125,17 @@ local feedkey = function(key, mode)
         true)
 end
 
-vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, {silent=true})
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {silent=true})
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {silent=true})
+vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { silent = true })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { silent = true })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { silent = true })
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
-        vim.keymap.set('n', '<Leader>a', vim.lsp.buf.code_action, {buffer = args.buf})
-        vim.keymap.set('n', '<Leader>r', vim.lsp.buf.rename, {buffer = args.buf})
+        vim.keymap.set('n', '<Leader>a', vim.lsp.buf.code_action, { buffer = args.buf })
+        vim.keymap.set('n', '<Leader>r', vim.lsp.buf.rename, { buffer = args.buf })
     end,
+})
+vim.api.nvim_create_autocmd('BufWritePre', {
+    callback = vim.lsp.buf.formatting_sync
 })
 
 require("fidget").setup()
@@ -173,8 +176,8 @@ cmp.setup({
     }),
 
     sources = cmp.config.sources(
-    { { name = 'nvim_lsp' }, { name = 'vsnip' } },
-    { { name = 'nvim_lsp_signature_help' }, { name = 'buffer' } })
+        { { name = 'nvim_lsp' }, { name = 'vsnip' } },
+        { { name = 'nvim_lsp_signature_help' }, { name = 'buffer' } })
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
@@ -185,7 +188,7 @@ cmp.setup.cmdline({ '/', '?' }, {
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({ { name = 'path' } },
-                                 { { name = 'cmdline' } })
+        { { name = 'cmdline' } })
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -197,7 +200,7 @@ lspconfig.sumneko_lua.setup {
     settings = {
         Lua = {
             runtime = { version = 'LuaJIT' },
-            diagnostics = { globals = {'vim'} },
+            diagnostics = { globals = { 'vim' } },
             workspace = {
                 library = vim.api.nvim_get_runtime_file("", true),
                 checkThirdParty = false,
