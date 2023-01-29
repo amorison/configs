@@ -13,7 +13,9 @@ vim.o.shiftwidth = 4
 vim.o.list = true
 vim.o.listchars = "tab:•·❯,trail:•"
 
-vim.keymap.set('n', '<Space>', ':nohlsearch<Bar>:echo<CR>')
+vim.keymap.set('n', '<Space>', '<Nop>', {silent = true, noremap = true})
+vim.g.mapleader = ' '
+vim.keymap.set('n', '<Leader><Space>', ':nohlsearch<Bar>:echo<CR>', {silent = true})
 
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
