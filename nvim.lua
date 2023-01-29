@@ -15,7 +15,7 @@ vim.o.listchars = "tab:•·❯,trail:•"
 
 vim.keymap.set('n', '<Space>', '<Nop>', {silent = true, noremap = true})
 vim.g.mapleader = ' '
-vim.keymap.set('n', '<Leader><Space>', ':nohlsearch<Bar>:echo<CR>', {silent = true})
+vim.keymap.set('n', '<Leader><Space>', ':nohlsearch<Bar>:echo<CR>', {silent = true, noremap = true})
 
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
@@ -125,10 +125,13 @@ local feedkey = function(key, mode)
         true)
 end
 
+vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, {silent=true})
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {silent=true})
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {silent=true})
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
-        vim.keymap.set({'n', 'i'}, '<C-k>', vim.lsp.buf.code_action,
-                       { buffer = args.buf })
+        vim.keymap.set('n', '<Leader>a', vim.lsp.buf.code_action, {buffer = args.buf})
+        vim.keymap.set('n', '<Leader>r', vim.lsp.buf.rename, {buffer = args.buf})
     end,
 })
 
