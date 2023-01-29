@@ -84,9 +84,11 @@ require("gitsigns").setup({
 require("lualine").setup({
     sections = {
         lualine_b = { 'branch', 'diff' },
+        lualine_c = { { 'filename', newfile_status = true, path = 1 } },
         lualine_x = { 'diagnostics' },
     },
     inactive_sections = {
+        lualine_c = { { 'filename', newfile_status = true, path = 1 } },
         lualine_x = { 'diagnostics', 'location' },
     },
 })
