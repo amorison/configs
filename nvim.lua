@@ -73,6 +73,18 @@ vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter" }, {
     group = hi_grp,
 })
 
+require('kanagawa').setup({
+    dimInactive = true,
+    overrides = {
+        MatchParen = { bg = "#aa435c", fg = "#f4a261" },
+        At80thCol = { bg = "#000040" },
+    },
+})
+if vim.g.started_by_firenvim then
+    vim.o.background = "light"
+end
+vim.cmd("colorscheme kanagawa")
+
 require("gitsigns").setup({
     current_line_blame = true,
     current_line_blame_opts = {
@@ -91,19 +103,17 @@ require("lualine").setup({
         lualine_c = { { 'filename', newfile_status = true, path = 1 } },
         lualine_x = { 'diagnostics', 'location' },
     },
-})
-
-require('kanagawa').setup({
-    dimInactive = true,
-    overrides = {
-        MatchParen = { bg = "#aa435c", fg = "#f4a261" },
-        At80thCol = { bg = "#000040" },
+    tabline = {
+        lualine_a = {
+            {
+                "tabs",
+                max_length = vim.o.columns,
+                mode = 2,
+            }
+        },
     },
 })
-if vim.g.started_by_firenvim then
-    vim.o.background = "light"
-end
-vim.cmd("colorscheme kanagawa")
+vim.o.showtabline = 1
 
 vim.g.firenvim_config = {
     localSettings = {
