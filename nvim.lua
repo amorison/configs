@@ -1,3 +1,80 @@
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+    {
+        "rebelot/kanagawa.nvim",
+        priority = 100,
+        config = function()
+            require('kanagawa').setup({
+                dimInactive = true,
+                overrides = {
+                    MatchParen = { bg = "#aa435c", fg = "#f4a261" },
+                    At80thCol = { bg = "#000040" },
+                },
+            })
+            if vim.g.started_by_firenvim then
+                vim.o.background = "light"
+            end
+            vim.cmd("colorscheme kanagawa")
+        end,
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+    "neovim/nvim-lspconfig",
+    {
+        "j-hui/fidget.nvim",
+        config = true,
+    },
+    {
+        "lewis6991/gitsigns.nvim",
+        opts = {
+            current_line_blame = true,
+            current_line_blame_opts = {
+                virt_text_pos = "right_align",
+            },
+            current_line_blame_formatter = "<abbrev_sha>, <author_time:%Y-%m-%d> - <summary>",
+        },
+    },
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-vsnip",
+            "hrsh7th/vim-vsnip",
+        },
+    },
+    {
+        "glacambre/firenvim",
+        build = function() vim.fn['firenvim#install'](0) end,
+        init = function()
+            vim.g.firenvim_config = {
+                localSettings = {
+                    [".*"] = {
+                        takeover = "never",
+                    },
+                },
+            }
+        end,
+    }
+})
+
 vim.o.relativenumber = true
 vim.o.number = true
 vim.o.cursorline = true
@@ -22,75 +99,10 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 
-local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-        vim.cmd("packadd packer.nvim")
-        return true
-    end
-    return false
-end
-
-local packer_bootstrap = ensure_packer()
-
-local use = require('packer').use
-require('packer').startup(function()
-    use 'wbthomason/packer.nvim'
-    use 'rebelot/kanagawa.nvim'
-    use {
-        'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    }
-    use 'neovim/nvim-lspconfig'
-    use 'j-hui/fidget.nvim'
-
-    use 'lewis6991/gitsigns.nvim'
-
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-nvim-lsp-signature-help'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/nvim-cmp'
-
-    use 'hrsh7th/cmp-vsnip'
-    use 'hrsh7th/vim-vsnip'
-    use {
-        'glacambre/firenvim',
-        run = function() vim.fn['firenvim#install'](0) end
-    }
-
-    if packer_bootstrap then
-        require("packer").sync()
-    end
-end)
-
 local hi_grp = vim.api.nvim_create_augroup("custom_hi", { clear = true })
 vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter" }, {
     command = [[match At80thCol /\%>79v.*\n\@!\%<81v/]],
     group = hi_grp,
-})
-
-require('kanagawa').setup({
-    dimInactive = true,
-    overrides = {
-        MatchParen = { bg = "#aa435c", fg = "#f4a261" },
-        At80thCol = { bg = "#000040" },
-    },
-})
-if vim.g.started_by_firenvim then
-    vim.o.background = "light"
-end
-vim.cmd("colorscheme kanagawa")
-
-require("gitsigns").setup({
-    current_line_blame = true,
-    current_line_blame_opts = {
-        virt_text_pos = "right_align",
-    },
-    current_line_blame_formatter = "<abbrev_sha>, <author_time:%Y-%m-%d> - <summary>",
 })
 
 require("lualine").setup({
@@ -114,14 +126,6 @@ require("lualine").setup({
     },
 })
 vim.o.showtabline = 1
-
-vim.g.firenvim_config = {
-    localSettings = {
-        [".*"] = {
-            takeover = "never",
-        },
-    },
-}
 
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -150,8 +154,6 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     callback = vim.lsp.buf.formatting_sync
 })
 
-require("fidget").setup()
-
 local cmp = require('cmp')
 local cmp_types = require("cmp.types")
 
@@ -161,7 +163,7 @@ cmp.setup({
         expand = function(args) vim.fn["vsnip#anonymous"](args.body) end,
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-b>'] = cmp.mapping.scroll_docs( -4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
@@ -181,12 +183,11 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping(function()
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+            elseif vim.fn["vsnip#jumpable"]( -1) == 1 then
                 feedkey("<Plug>(vsnip-jump-prev)", "")
             end
         end, { "i", "s" }),
     }),
-
     sources = cmp.config.sources(
         { { name = 'nvim_lsp' }, { name = 'vsnip' } },
         { { name = 'nvim_lsp_signature_help' }, { name = 'buffer' } })
