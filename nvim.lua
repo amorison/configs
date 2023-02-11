@@ -20,7 +20,6 @@ require("lazy").setup({
                 dimInactive = true,
                 overrides = {
                     MatchParen = { bg = "#aa435c", fg = "#f4a261" },
-                    At80thCol = { bg = "#000040" },
                 },
             })
             if vim.g.started_by_firenvim then
@@ -98,12 +97,6 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
-
-local hi_grp = vim.api.nvim_create_augroup("custom_hi", { clear = true })
-vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter" }, {
-    command = [[match At80thCol /\%>79v.*\n\@!\%<81v/]],
-    group = hi_grp,
-})
 
 require("lualine").setup({
     sections = {
