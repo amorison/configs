@@ -15,13 +15,14 @@ require("lazy").setup({
     {
         "rebelot/kanagawa.nvim",
         priority = 100,
-        config = function()
-            require('kanagawa').setup({
-                dimInactive = true,
-                overrides = {
-                    MatchParen = { bg = "#aa435c", fg = "#f4a261" },
-                },
-            })
+        opts = {
+            dimInactive = true,
+            overrides = {
+                MatchParen = { bg = "#aa435c", fg = "#f4a261" },
+            },
+        },
+        config = function(_, opts)
+            require('kanagawa').setup(opts)
             if vim.g.started_by_firenvim then
                 vim.o.background = "light"
             end
