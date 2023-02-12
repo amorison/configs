@@ -38,28 +38,6 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 
-require("lualine").setup({
-    sections = {
-        lualine_b = { 'branch', 'diff' },
-        lualine_c = { { 'filename', newfile_status = true, path = 1 } },
-        lualine_x = { 'diagnostics' },
-    },
-    inactive_sections = {
-        lualine_c = { { 'filename', newfile_status = true, path = 1 } },
-        lualine_x = { 'diagnostics', 'location' },
-    },
-    tabline = {
-        lualine_a = {
-            {
-                "tabs",
-                max_length = vim.o.columns,
-                mode = 2,
-            }
-        },
-    },
-})
-vim.o.showtabline = 1
-
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and

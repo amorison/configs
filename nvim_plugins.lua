@@ -16,6 +16,30 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            sections = {
+                lualine_b = { 'branch', 'diff' },
+                lualine_c = { { 'filename', newfile_status = true, path = 1 } },
+                lualine_x = { 'diagnostics' },
+            },
+            inactive_sections = {
+                lualine_c = { { 'filename', newfile_status = true, path = 1 } },
+                lualine_x = { 'diagnostics', 'location' },
+            },
+            tabline = {
+                lualine_a = {
+                    {
+                        "tabs",
+                        max_length = vim.o.columns,
+                        mode = 2,
+                    }
+                },
+            },
+        },
+        config = function(_, opts)
+            require("lualine").setup(opts)
+            vim.o.showtabline = 1
+        end,
     },
     "neovim/nvim-lspconfig",
     {
