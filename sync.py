@@ -175,7 +175,6 @@ if __name__ == "__main__":
         Symlink(path=home / ".config/nvim/init.lua", target="nvim.lua"),
         Symlink(path=home / ".config/nvim/lua/plugins.lua", target="nvim_plugins.lua"),
         Symlink(path=home / ".vimrc", target="vimrc"),
-        Symlink(path=home / ".vim/ftplugin/tex.vim", target="tex.vim"),
         # zsh
         Symlink(path=home / ".zshrc", target="zshrc"),
         Symlink(path=home / ".p10k.zsh", target="p10k.zsh"),  # config of p10k
