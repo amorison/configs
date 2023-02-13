@@ -5,21 +5,17 @@ local has_words_before = function()
         match("%s") == nil
 end
 
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(
-        vim.api.nvim_replace_termcodes(key, true, true, true),
-        mode,
-        true)
-end
-
 local function cmp_config()
     local cmp = require('cmp')
     local cmp_types = require("cmp.types")
+    local snippy = require("snippy")
 
     cmp.setup({
         preselect = cmp_types.cmp.PreselectMode.None,
         snippet = {
-            expand = function(args) vim.fn["vsnip#anonymous"](args.body) end,
+            expand = function(args)
+                snippy.expand_snippet(args.body)
+            end,
         },
         mapping = cmp.mapping.preset.insert({
             ['<C-b>'] = cmp.mapping.scroll_docs( -4),
@@ -30,26 +26,31 @@ local function cmp_config()
             ["<Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
-                elseif vim.fn["vsnip#available"](1) == 1 then
-                    feedkey("<Plug>(vsnip-expand-or-jump)", "")
+                elseif snippy.can_expand_or_advance() then
+                    snippy.expand_or_advance()
                 elseif has_words_before() then
                     cmp.complete()
                 else
                     fallback()
                 end
             end, { "i", "s" }),
-
-            ["<S-Tab>"] = cmp.mapping(function()
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
-                elseif vim.fn["vsnip#jumpable"]( -1) == 1 then
-                    feedkey("<Plug>(vsnip-jump-prev)", "")
+                elseif snippy.can_jump( -1) then
+                    snippy.previous()
+                else
+                    fallback()
                 end
             end, { "i", "s" }),
         }),
-        sources = cmp.config.sources(
-            { { name = 'nvim_lsp' }, { name = 'vsnip' } },
-            { { name = 'nvim_lsp_signature_help' }, { name = 'buffer' } })
+        sources = cmp.config.sources({
+            { name = "nvim_lsp" },
+            { name = "snippy" }
+        }, {
+            { name = "nvim_lsp_signature_help" },
+            { name = "buffer" }
+        })
     })
 
     cmp.setup.cmdline({ '/', '?' }, {
@@ -182,8 +183,9 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
-            "hrsh7th/cmp-vsnip",
-            "hrsh7th/vim-vsnip",
+            "dcampos/nvim-snippy",
+            "dcampos/cmp-snippy",
+            "honza/vim-snippets",
         },
         config = cmp_config,
     },
