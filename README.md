@@ -42,9 +42,7 @@ https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel1
 
 ### Neovim
 
-Run `:PackerSync` to install/update plugins. Packer is installed and synced
-automatically when starting `nvim` for the first time on a fresh install with
-this config.
+Run `:Lazy` to manage plugins, `:checkhealth` to get some general diagnostics.
 
 ### Vim
 
