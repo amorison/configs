@@ -23,7 +23,7 @@ The following LSP servers are used and need to be installed:
 - `fortls`, available on PyPI
 - `cmake-language-server`, available on PyPI
 - https://github.com/latex-lsp/texlab
-- https://github.com/sumneko/lua-language-server
+- https://github.com/LuaLS/lua-language-server
 
 ### Starship
 
