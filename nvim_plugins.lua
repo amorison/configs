@@ -123,9 +123,6 @@ return {
         },
         config = function(_, opts)
             require('kanagawa').setup(opts)
-            if vim.g.started_by_firenvim then
-                vim.o.background = "light"
-            end
             vim.cmd("colorscheme kanagawa")
         end,
     },
@@ -191,7 +188,11 @@ return {
     },
     {
         "glacambre/firenvim",
-        build = function() vim.fn['firenvim#install'](0) end,
+        cond = not not vim.g.started_by_firenvim,
+        build = function()
+            require("lazy").load({ plugins = { "firenvim" }, wait = true })
+            vim.fn['firenvim#install'](0)
+        end,
         init = function()
             vim.g.firenvim_config = {
                 localSettings = {
@@ -200,6 +201,9 @@ return {
                     },
                 },
             }
+        end,
+        config = function()
+            vim.o.background = "light"
         end,
     }
 }
