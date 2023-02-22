@@ -174,6 +174,7 @@ if __name__ == "__main__":
         # nvim
         Symlink(path=home / ".config/nvim/init.lua", target="nvim.lua"),
         Symlink(path=home / ".config/nvim/lua/plugins.lua", target="nvim_plugins.lua"),
+        Symlink(path=home / ".config/nvim/snippets/_.snippets", target="nvim.snippets"),
         Symlink(path=home / ".vimrc", target="vimrc"),
         # zsh
         Symlink(path=home / ".zshrc", target="zshrc"),
