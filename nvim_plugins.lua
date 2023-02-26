@@ -203,7 +203,9 @@ return {
             }
         end,
         config = function()
-            vim.o.background = "light"
+            if vim.g.started_by_firenvim then
+                vim.o.background = "light"
+            end
         end,
     }
 }
