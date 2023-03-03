@@ -16,20 +16,20 @@ vim.g.mapleader = ' '
 
 require("lazy").setup("plugins")
 
-vim.o.relativenumber = true
-vim.o.number = true
-vim.o.cursorline = true
-vim.o.cursorlineopt = "number"
-vim.o.mouse = nil
-vim.o.termguicolors = true
+vim.opt.relativenumber = true
+vim.opt.number = true
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
+vim.opt.mouse = nil
+vim.opt.termguicolors = true
 
-vim.o.tabstop = 4
-vim.o.expandtab = true
-vim.o.softtabstop = 4
-vim.o.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.expandtab = true
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 
-vim.o.list = true
-vim.o.listchars = "tab:•·❯,trail:•"
+vim.opt.list = true
+vim.opt.listchars = { tab = "•·❯", trail = "•" }
 
 vim.keymap.set('n', '<Leader><Space>', ':nohlsearch<CR>', { silent = true, noremap = true })
 

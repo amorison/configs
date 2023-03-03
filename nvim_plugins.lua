@@ -143,7 +143,7 @@ return {
                 lualine_a = {
                     {
                         "tabs",
-                        max_length = vim.o.columns,
+                        max_length = vim.opt.columns:get(),
                         mode = 2,
                     }
                 },
@@ -151,7 +151,7 @@ return {
         },
         config = function(_, opts)
             require("lualine").setup(opts)
-            vim.o.showtabline = 1
+            vim.opt.showtabline = 1
         end,
     },
     {
@@ -204,7 +204,7 @@ return {
         end,
         config = function()
             if vim.g.started_by_firenvim then
-                vim.o.background = "light"
+                vim.opt.background = "light"
             end
         end,
     }
