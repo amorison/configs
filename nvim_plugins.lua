@@ -46,10 +46,11 @@ local function cmp_config()
         }),
         sources = cmp.config.sources({
             { name = "nvim_lsp" },
-            { name = "snippy" }
-        }, {
+            { name = "snippy" },
             { name = "nvim_lsp_signature_help" },
-            { name = "buffer" }
+            { name = "path" },
+        }, {
+            { name = "buffer" },
         })
     })
 
