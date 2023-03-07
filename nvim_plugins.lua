@@ -18,7 +18,7 @@ local function cmp_config()
             end,
         },
         mapping = cmp.mapping.preset.insert({
-            ['<C-b>'] = cmp.mapping.scroll_docs( -4),
+            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-Space>'] = cmp.mapping.complete(),
             ['<C-e>'] = cmp.mapping.abort(),
@@ -37,7 +37,7 @@ local function cmp_config()
             ["<S-Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
-                elseif snippy.can_jump( -1) then
+                elseif snippy.can_jump(-1) then
                     snippy.previous()
                 else
                     fallback()
