@@ -75,12 +75,7 @@ local function lsp_config()
         capabilities = capabilities,
         settings = {
             Lua = {
-                runtime = { version = 'LuaJIT' },
-                diagnostics = { globals = { 'vim' } },
-                workspace = {
-                    library = vim.api.nvim_get_runtime_file("", true),
-                    checkThirdParty = false,
-                },
+                workspace = { checkThirdParty = false },
                 telemetry = { enable = false, },
             },
         },
@@ -157,6 +152,20 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
+        dependencies = {
+            {
+                "folke/neodev.nvim",
+                opts = {
+                    override = function(root_dir, library)
+                        local stat = vim.loop.fs_stat(root_dir .. "/nvim.lua")
+                        if stat and stat.type then
+                            library.enabled = true
+                            library.plugins = true
+                        end
+                    end,
+                },
+            }
+        },
         config = lsp_config,
     },
     {
