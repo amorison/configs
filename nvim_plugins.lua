@@ -135,20 +135,29 @@ return {
                 lualine_c = { { 'filename', newfile_status = true, path = 1 } },
                 lualine_x = { 'diagnostics', 'location' },
             },
-            tabline = {
-                lualine_a = {
-                    {
-                        "tabs",
-                        max_length = vim.opt.columns:get(),
-                        mode = 2,
-                    }
-                },
+        },
+    },
+    {
+        "akinsho/bufferline.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            options = {
+                mode = "tabs",
+                numbers = function(opts)
+                    return string.format("%s", opts.raise(opts.ordinal))
+                end,
+                show_buffer_close_icons = false,
+                show_close_icon = false,
+                hover = { enable = false },
+                diagnostics = "nvim_lsp",
+                diagnostics_indicator = function(_, level)
+                    local icon = ""
+                    icon = level:match("warning") and "" or icon
+                    icon = level:match("error") and "" or icon
+                    return icon
+                end,
             },
         },
-        config = function(_, opts)
-            require("lualine").setup(opts)
-            vim.opt.showtabline = 1
-        end,
     },
     {
         "neovim/nvim-lspconfig",
