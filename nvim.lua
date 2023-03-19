@@ -14,7 +14,9 @@ vim.opt.rtp:prepend(lazypath)
 vim.keymap.set('n', '<Space>', '<Nop>', { silent = true, noremap = true })
 vim.g.mapleader = ' '
 
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+    change_detection = { enabled = false },
+})
 
 vim.opt.relativenumber = true
 vim.opt.number = true
