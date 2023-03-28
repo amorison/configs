@@ -151,6 +151,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     home = Path.home()
+    config = home / ".config"
 
     remotes = [
         RemoteFile(
@@ -166,16 +167,16 @@ if __name__ == "__main__":
         Symlink(path=home / ".alacritty.yml", target="alacritty.yml"),
         Symlink(path=home / ".alias", target="alias"),
         Symlink(path=home / ".tmux.conf", target="tmux.conf"),
-        Symlink(path=home / ".config/wezterm/wezterm.lua", target="wezterm.lua"),
+        Symlink(path=config / "wezterm/wezterm.lua", target="wezterm.lua"),
         # bash
         Symlink(path=home / ".bashrc", target="bashrc"),
-        Symlink(path=home / ".config/starship.toml", target="starship.toml"),
+        Symlink(path=config / "starship.toml", target="starship.toml"),
         # latex
         Symlink(path=home / ".latexmkrc", target="latexmkrc"),
         # nvim
-        Symlink(path=home / ".config/nvim/init.lua", target="nvim.lua"),
-        Symlink(path=home / ".config/nvim/lua/plugins.lua", target="nvim_plugins.lua"),
-        Symlink(path=home / ".config/nvim/snippets/_.snippets", target="nvim.snippets"),
+        Symlink(path=config / "nvim/init.lua", target="nvim.lua"),
+        Symlink(path=config / "nvim/lua/plugins.lua", target="nvim_plugins.lua"),
+        Symlink(path=config / "nvim/snippets/_.snippets", target="nvim.snippets"),
         Symlink(path=home / ".vimrc", target="vimrc"),
         # zsh
         Symlink(path=home / ".zshrc", target="zshrc"),
