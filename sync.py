@@ -166,6 +166,7 @@ if __name__ == "__main__":
         Symlink(path=home / ".alacritty.yml", target="alacritty.yml"),
         Symlink(path=home / ".alias", target="alias"),
         Symlink(path=home / ".tmux.conf", target="tmux.conf"),
+        Symlink(path=home / ".config/wezterm/wezterm.lua", target="wezterm.lua"),
         # bash
         Symlink(path=home / ".bashrc", target="bashrc"),
         Symlink(path=home / ".config/starship.toml", target="starship.toml"),
