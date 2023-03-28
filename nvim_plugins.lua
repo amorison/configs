@@ -77,6 +77,7 @@ local function lsp_config()
             Lua = {
                 workspace = { checkThirdParty = false },
                 telemetry = { enable = false, },
+                format = { defaultConfig = { align_array_table = "false" } },
             },
         },
     }
