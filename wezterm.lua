@@ -18,7 +18,6 @@ config.color_scheme = "Brogrammer"
 config.font = wezterm.font("MesloLGS NF")
 config.freetype_load_flags = "NO_HINTING"
 config.font_size = 11.0
-config.custom_block_glyphs = false
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 
 local act = wezterm.action
