@@ -13,6 +13,7 @@ end)
 
 local config = wezterm.config_builder()
 
+config.hide_mouse_cursor_when_typing = false
 config.color_scheme = "Brogrammer"
 
 config.font = wezterm.font("MesloLGS NF")
