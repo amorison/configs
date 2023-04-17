@@ -40,6 +40,14 @@ config.keys = {
     { key = "L", mods = "ALT|SHIFT", action = act.ActivateTabRelative(1) },
 }
 
+for i = 1, 9 do
+    table.insert(config.keys, {
+        key = tostring(i),
+        mods = "ALT",
+        action = act.ActivateTab(i - 1),
+    })
+end
+
 config.mouse_bindings = {
     {
         event = { Down = { streak = 1, button = "Right" } },
