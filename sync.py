@@ -141,6 +141,17 @@ class FileInGitRepo:
         raise RuntimeError(f"{self._fetched_path} does not exist")
 
 
+@dataclass(frozen=True)
+class PyPack:
+    name: str
+
+    def install(self) -> None:
+        print(f"installing {self.name} with pip")
+        subprocess.run(
+            ("python3", "-m", "pip", "install", "-qU", self.name),
+        )
+
+
 if __name__ == "__main__":
     import argparse
 
@@ -205,9 +216,28 @@ if __name__ == "__main__":
     )
     links.append(Symlink(path=home / ".zshsynthl", target=zsh_hl.fetch()))
 
+    py_packs = [
+        PyPack("pip"),
+        PyPack("python-lsp-server[rope]"),
+        PyPack("pylsp-rope"),
+        PyPack("pylsp-mypy"),
+        PyPack("python-lsp-black"),
+        PyPack("python-lsp-ruff"),
+        PyPack("fortls"),
+        PyPack("cmake-language-server"),
+    ]
+
     if shutil.which("nvim") is None:
         nvim = NvimApp(local_dir=Path(".nvim")).download(args.force)
         links.append(Symlink(path=home / ".local/bin/nvim", target=nvim))
 
     for link in links:
         link.create(force=args.force)
+
+    print("ensuring pip")
+    subprocess.run(
+        ("python3", "-m", "ensurepip"),
+        capture_output=True,
+    )
+    for pack in py_packs:
+        pack.install()
