@@ -102,7 +102,9 @@ local function lsp_config()
         settings = {
             pylsp = {
                 plugins = {
-                    pycodestyle = { maxLineLength = 100 },
+                    ruff = {
+                        extendSelect = { "I" },
+                    },
                 },
             },
         },

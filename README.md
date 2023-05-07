@@ -17,8 +17,8 @@ is not in your `$PATH`, the script installs it.
 The following LSP servers are used and need to be installed:
 
 - Rust analyzer, available through `rustup`
-- `python-lsp-server[all]` along with `pylsp-mypy`, `pyls-isort`,
-  `python-lsp-black`, available on PyPI
+- `python-lsp-server[rope]`, `pylsp-rope`, along with `pylsp-mypy`,`python-lsp-black`,
+  `python-lsp-ruff`, available on PyPI
 - `clangd`, usually distributed as part of clang
 - `fortls`, available on PyPI
 - `cmake-language-server`, available on PyPI
