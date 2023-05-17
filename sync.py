@@ -175,7 +175,6 @@ if __name__ == "__main__":
 
     links = [
         # terminal
-        Symlink(path=home / ".alacritty.yml", target="alacritty.yml"),
         Symlink(path=home / ".alias", target="alias"),
         Symlink(path=home / ".tmux.conf", target="tmux.conf"),
         Symlink(path=config / "wezterm/wezterm.lua", target="wezterm.lua"),
