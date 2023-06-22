@@ -20,6 +20,7 @@ config.font = wezterm.font("MesloLGS NF")
 config.freetype_load_flags = "NO_HINTING"
 config.font_size = 11.0
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
+config.warn_about_missing_glyphs = false
 
 local act = wezterm.action
 config.disable_default_key_bindings = true
