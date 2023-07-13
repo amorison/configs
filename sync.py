@@ -223,7 +223,6 @@ if __name__ == "__main__":
         PyPack("python-lsp-black"),
         PyPack("python-lsp-ruff"),
         PyPack("fortls"),
-        PyPack("cmake-language-server"),
     ]
 
     if shutil.which("nvim") is None:

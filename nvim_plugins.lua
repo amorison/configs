@@ -84,8 +84,6 @@ local function lsp_config()
 
     lspconfig.rust_analyzer.setup { capabilities = capabilities, }
 
-    lspconfig.cmake.setup { capabilities = capabilities, }
-
     lspconfig.clangd.setup { capabilities = capabilities }
 
     lspconfig.fortls.setup {
