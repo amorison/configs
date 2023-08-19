@@ -95,6 +95,8 @@ local function lsp_config()
         },
     }
 
+    lspconfig.jsonls.setup { capabilities = capabilities }
+
     lspconfig.pylsp.setup {
         capabilities = capabilities,
         settings = {
