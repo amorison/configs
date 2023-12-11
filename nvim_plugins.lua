@@ -104,6 +104,7 @@ local function lsp_config()
                 plugins = {
                     ruff = {
                         extendSelect = { "I" },
+                        format = { "I" },
                     },
                 },
             },
