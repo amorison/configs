@@ -194,6 +194,22 @@ return {
         config = true,
     },
     {
+        "nvim-treesitter/nvim-treesitter",
+        build = function()
+            require("nvim-treesitter.install").update({ with_sync = true })()
+        end,
+        config = function()
+            local configs = require("nvim-treesitter.configs")
+
+            configs.setup({
+                ensure_installed = { "c", "lua", "vim", "vimdoc", "fortran", "python", "cmake" },
+                sync_install = false,
+                highlight = { enable = true },
+                indent = { enable = true },
+            })
+        end
+    },
+    {
         "lewis6991/gitsigns.nvim",
         opts = {
             current_line_blame = true,
