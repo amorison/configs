@@ -49,6 +49,7 @@
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
+    my_dev_env
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
@@ -1657,6 +1658,11 @@
   # Type `p10k help segment` for documentation and a more sophisticated example.
   function prompt_example() {
     p10k segment -f 208 -i '⭐' -t 'hello, %n'
+  }
+
+  function prompt_my_dev_env() {
+    [[ -z ${MY_DEV_ENV_} ]] && return
+    p10k segment -i '' -f 208 -t "${MY_DEV_ENV_}"
   }
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
