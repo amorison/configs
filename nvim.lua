@@ -41,8 +41,6 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 
 vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { silent = true })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { silent = true })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { silent = true })
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         vim.keymap.set('n', '<Leader>a', vim.lsp.buf.code_action, { buffer = args.buf })
