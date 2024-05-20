@@ -66,7 +66,7 @@ local function cmp_config()
     })
 end
 
-local function lsp_config()
+local function lsp_config(_, opts)
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
     local lspconfig = require('lspconfig')
@@ -112,6 +112,10 @@ local function lsp_config()
     }
 
     lspconfig.texlab.setup { capabilities = capabilities }
+
+    if opts.inlay_hints.enabled then
+        vim.lsp.inlay_hint.enable(true)
+    end
 end
 
 return {
@@ -165,6 +169,9 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
+        opts = {
+            inlay_hints = { enabled = true },
+        },
         dependencies = {
             {
                 "folke/neodev.nvim",
