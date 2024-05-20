@@ -22,7 +22,7 @@ vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
-vim.opt.mouse = nil
+vim.opt.mouse = ""
 vim.opt.termguicolors = true
 
 vim.opt.tabstop = 4
