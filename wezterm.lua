@@ -13,6 +13,7 @@ end)
 
 local config = wezterm.config_builder()
 
+config.window_decorations = "NONE"
 config.hide_mouse_cursor_when_typing = false
 config.color_scheme = "Brogrammer"
 
