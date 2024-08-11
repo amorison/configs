@@ -50,6 +50,8 @@ export PATH
 export EDITOR=nvim
 source ~/.alias
 
+safesource /usr/share/zsh/site-functions/_pyenv
+
 unfunction safesource
 
 if which pyenv > /dev/null 2>&1; then
