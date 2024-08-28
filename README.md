@@ -9,6 +9,10 @@ Use the `-f` option `./sync.py -f` to remove existing files before linking.
 
 ## Stuff to install manually
 
+### Python
+
+Install [uv to manage Python environments](https://docs.astral.sh/uv/getting-started/installation/).
+
 ### Neovim
 
 Install neovim with your package manager _before_ running `sync.py`.  If `nvim`
@@ -20,7 +24,7 @@ The following LSP servers are used and need to be installed:
 - `clangd`, usually distributed as part of clang
 - https://github.com/latex-lsp/texlab
 - https://github.com/LuaLS/lua-language-server
-- servers for Python, Fortran, and CMake are installed by `sync.py` via `pip`
+- some servers are installed by `sync.py` via `uv`
 
 ### Starship
 
