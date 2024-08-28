@@ -144,12 +144,14 @@ class FileInGitRepo:
 @dataclass(frozen=True)
 class PyTool:
     name: str
+    with_deps: tuple[str, ...] = ()
 
     def install(self) -> None:
-        print(f"installing {self.name} with pip")
-        subprocess.run(
-            ("python3", "-m", "pip", "install", "-qU", self.name),
-        )
+        print(f"installing {self.name} with uv")
+        cmd = ["uv", "tool", "install", "--upgrade", self.name]
+        for dep in self.with_deps:
+            cmd.extend(("--with", dep))
+        subprocess.run(cmd)
 
 
 if __name__ == "__main__":
@@ -216,11 +218,10 @@ if __name__ == "__main__":
     links.append(Symlink(path=home / ".zshsynthl", target=zsh_hl.fetch()))
 
     py_packs = [
-        PyTool("pip"),
-        PyTool("python-lsp-server[rope]"),
-        PyTool("pylsp-rope"),
-        PyTool("pylsp-mypy"),
-        PyTool("python-lsp-ruff"),
+        PyTool(
+            "python-lsp-server[rope]",
+            with_deps=("pylsp-rope", "pylsp-mypy", "python-lsp-ruff"),
+        ),
         PyTool("fortls"),
     ]
 
@@ -231,10 +232,6 @@ if __name__ == "__main__":
     for link in links:
         link.create(force=args.force)
 
-    print("ensuring pip")
-    subprocess.run(
-        ("python3", "-m", "ensurepip"),
-        capture_output=True,
-    )
+    # could try to install uv if not present
     for pack in py_packs:
         pack.install()
