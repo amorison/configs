@@ -33,11 +33,8 @@ autoload -Uz sshmount sshumount
 
 eval $(dircolors)  # set LS_COLORS
 
-export PYENV_ROOT="${HOME}/.pyenv"
-
 typeset -a add_to_path
 add_to_path=(~/.local/bin
-             "${PYENV_ROOT}/bin"
              ~/.cargo/bin)
 typeset -U path
 for dirname in ${add_to_path}; do
@@ -50,13 +47,7 @@ export PATH
 export EDITOR=nvim
 source ~/.alias
 
-safesource /usr/share/zsh/site-functions/_pyenv
-
 unfunction safesource
-
-if which pyenv > /dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
 
 source ~/.zshsynthl
 
