@@ -142,7 +142,7 @@ class FileInGitRepo:
 
 
 @dataclass(frozen=True)
-class PyPack:
+class PyTool:
     name: str
 
     def install(self) -> None:
@@ -216,12 +216,12 @@ if __name__ == "__main__":
     links.append(Symlink(path=home / ".zshsynthl", target=zsh_hl.fetch()))
 
     py_packs = [
-        PyPack("pip"),
-        PyPack("python-lsp-server[rope]"),
-        PyPack("pylsp-rope"),
-        PyPack("pylsp-mypy"),
-        PyPack("python-lsp-ruff"),
-        PyPack("fortls"),
+        PyTool("pip"),
+        PyTool("python-lsp-server[rope]"),
+        PyTool("pylsp-rope"),
+        PyTool("pylsp-mypy"),
+        PyTool("python-lsp-ruff"),
+        PyTool("fortls"),
     ]
 
     if shutil.which("nvim") is None:
