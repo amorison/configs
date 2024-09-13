@@ -16,6 +16,7 @@ vim.g.mapleader = ' '
 
 require("lazy").setup("plugins", {
     change_detection = { enabled = false },
+    rocks = { enabled = false },
 })
 
 vim.opt.relativenumber = true
