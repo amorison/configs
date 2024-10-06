@@ -1,0 +1,5 @@
+[Unit]
+Description=Backup with rustic
+
+[Service]
+ExecStart=/usr/bin/rustic backup

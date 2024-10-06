@@ -62,3 +62,8 @@ They are useful on an arch system:
 ```
 
 `pacman-contrib`, providing `paccache`, is needed.
+
+### backups
+
+See `rustic/README.md` to set up backups with rustic. This will likely require
+editing and therefore is not handled by `./sync.py`.

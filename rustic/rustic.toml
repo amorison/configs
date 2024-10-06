@@ -1,0 +1,24 @@
+[repository]
+repository = "opendal:sftp"
+password-command = "secret-tool lookup rustic-backup manwe-hdd"
+
+[repository.options]
+user = "adrien"
+endpoint = "100.81.95.30"
+root = "/mnt/backup-hdd/adrien/backup/rustic-repo"
+
+[backup]
+exclude-if-present = [".nobackup", "CACHEDIR.TAG"]
+git-ignore = true
+no-require-git = true
+
+[[backup.snapshots]]
+sources = ["/home/adrien"]
+globs = ["!/home/adrien/.*"]
+one-file-system = true
+
+[forget]
+keep-within-hourly = "3 days"
+keep-within-daily = "30 days"
+keep-within-monthly = "36 months"
+keep-within-half-yearly = "10 years"
