@@ -1,3 +1,6 @@
+[global]
+log-level = "warn"
+
 [repository]
 repository = "opendal:sftp"
 password-command = "secret-tool lookup rustic-backup manwe-hdd"
