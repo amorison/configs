@@ -20,6 +20,11 @@ sources = ["/home/adrien"]
 globs = ["!/home/adrien/.*"]
 one-file-system = true
 
+[[backup.snapshots]]
+sources = ["/home/adrien/.ssh/config"]
+one-file-system = true
+skip-identical-parent = true
+
 [forget]
 keep-within-hourly = "3 days"
 keep-within-daily = "30 days"
