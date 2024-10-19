@@ -1,0 +1,6 @@
+[global]
+use-profiles = ["home-source"]
+
+[repository]
+repository = "rclone:gdrive:backup-rustic-repo"
+password-command = "secret-tool lookup rustic-backup gdrive"
