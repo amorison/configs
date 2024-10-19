@@ -113,6 +113,14 @@ local function lsp_config(_, opts)
 
     lspconfig.texlab.setup { capabilities = capabilities }
 
+    lspconfig.tinymist.setup {
+        capabilities = capabilities,
+        root_dir = function(fname)
+            return require("lspconfig.util").root_pattern("typst.toml", ".git")(fname)
+                or vim.fn.getcwd()
+        end,
+    }
+
     if opts.inlay_hints.enabled then
         vim.lsp.inlay_hint.enable(true)
     end
@@ -208,7 +216,7 @@ return {
             local configs = require("nvim-treesitter.configs")
 
             configs.setup({
-                ensure_installed = { "c", "lua", "vim", "vimdoc", "fortran", "python", "cmake", "just" },
+                ensure_installed = { "c", "lua", "vim", "vimdoc", "fortran", "python", "cmake", "just", "typst" },
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = true },
