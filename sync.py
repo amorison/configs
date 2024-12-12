@@ -96,7 +96,7 @@ class NvimApp:
         if bare_img.returncode == 0:
             return self._appimage_path
         print("    extracting image...")
-        subprocess.run(
+        _ = subprocess.run(
             args=[f"./{self._appimage_path.name}", "--appimage-extract"],
             check=True,
             capture_output=True,
@@ -123,13 +123,13 @@ class FileInGitRepo:
             return self.substitute
         if self.local_clone.exists():
             print("    updating local clone")
-            subprocess.run(
+            _ = subprocess.run(
                 args=shlex.split("git pull"),
                 cwd=self.local_clone,
             )
         else:
             print("    cloning repository")
-            subprocess.run(
+            _ = subprocess.run(
                 args=shlex.split(
                     f"git clone --depth=1 '{self.url}' '{self.local_clone}'"
                 ),
@@ -149,7 +149,7 @@ class PyTool:
         cmd = ["uv", "tool", "install", "--upgrade", self.name]
         for dep in self.with_deps:
             cmd.extend(("--with", dep))
-        subprocess.run(cmd)
+        _ = subprocess.run(cmd)
 
 
 if __name__ == "__main__":
@@ -160,7 +160,7 @@ if __name__ == "__main__":
         force: bool = False
 
     parser = argparse.ArgumentParser()
-    parser.add_argument(
+    _ = parser.add_argument(
         "--force", "-f", action="store_true", help="replace existing files"
     )
     args = parser.parse_args(namespace=Args())
