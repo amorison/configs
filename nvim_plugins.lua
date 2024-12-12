@@ -97,15 +97,20 @@ local function lsp_config(_, opts)
 
     lspconfig.jsonls.setup { capabilities = capabilities }
 
-    lspconfig.pylsp.setup {
+    lspconfig.basedpyright.setup {
         capabilities = capabilities,
-        settings = {
-            pylsp = {
-                plugins = {
-                    ruff = {
-                        extendSelect = { "I" },
-                        format = { "I" },
-                    },
+        basedpyright = {
+            diagnosticMode = "openFilesOnly",
+            disableOrganizeImports = true,
+        },
+    }
+
+    lspconfig.ruff.setup {
+        capabilities = capabilities,
+        init_options = {
+            settings = {
+                lint = {
+                    extendSelect = { "I" },
                 },
             },
         },

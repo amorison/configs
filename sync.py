@@ -220,10 +220,8 @@ if __name__ == "__main__":
     links.append(Symlink(path=home / ".zshsynthl", target=zsh_hl.fetch()))
 
     py_packs = [
-        PyTool(
-            "python-lsp-server[rope]",
-            with_deps=("pylsp-rope", "pylsp-mypy", "python-lsp-ruff"),
-        ),
+        PyTool("basedpyright"),
+        PyTool("ruff"),
         PyTool("fortls"),
     ]
 
