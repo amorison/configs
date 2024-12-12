@@ -155,11 +155,15 @@ class PyTool:
 if __name__ == "__main__":
     import argparse
 
+    @dataclass
+    class Args:
+        force: bool = False
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--force", "-f", action="store_true", help="replace existing files"
     )
-    args = parser.parse_args()
+    args = parser.parse_args(namespace=Args())
 
     home = Path.home()
     config = home / ".config"
