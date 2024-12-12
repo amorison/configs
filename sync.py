@@ -8,16 +8,14 @@ import shutil
 import stat
 import subprocess
 from dataclasses import dataclass
-from os import PathLike
 from pathlib import Path
-from typing import Optional, Union
 from urllib.request import urlopen
 
 
 @dataclass(frozen=True)
 class Symlink:
     path: Path
-    target: Union[str, PathLike]
+    target: str | Path
 
     def create(self, force: bool) -> None:
         print(f"creating {self.path} -> {self.target}")
@@ -111,8 +109,8 @@ class NvimApp:
 class FileInGitRepo:
     url: str
     local_clone: Path
-    file_in_clone: Union[str, PathLike]
-    substitute: Optional[Path] = None
+    file_in_clone: str | Path
+    substitute: Path | None = None
 
     @property
     def _fetched_path(self) -> Path:
