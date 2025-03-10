@@ -49,10 +49,8 @@ class RemoteFile:
 @dataclass(frozen=True)
 class NvimApp:
     local_dir: Path
-    image_url: str = (
-        "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
-    )
-    sha256_url: str = "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage.sha256sum"
+    image_url: str = "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage"
+    sha256_url: str = "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage.sha256sum"
 
     @property
     def _appimage_path(self) -> Path:
