@@ -1,73 +1,5 @@
-local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and
-        vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):
-        match("%s") == nil
-end
-
-local function cmp_config()
-    local cmp = require('cmp')
-    local cmp_types = require("cmp.types")
-    local snippy = require("snippy")
-
-    cmp.setup({
-        preselect = cmp_types.cmp.PreselectMode.None,
-        snippet = {
-            expand = function(args)
-                snippy.expand_snippet(args.body)
-            end,
-        },
-        mapping = cmp.mapping.preset.insert({
-            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-            ['<C-f>'] = cmp.mapping.scroll_docs(4),
-            ['<C-Space>'] = cmp.mapping.complete(),
-            ['<C-e>'] = cmp.mapping.abort(),
-            ['<CR>'] = cmp.mapping.confirm({ select = false }),
-            ["<Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif snippy.can_expand_or_advance() then
-                    snippy.expand_or_advance()
-                elseif has_words_before() then
-                    cmp.complete()
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-            ["<S-Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                elseif snippy.can_jump(-1) then
-                    snippy.previous()
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-        }),
-        sources = cmp.config.sources({
-            { name = "nvim_lsp" },
-            { name = "snippy" },
-            { name = "nvim_lsp_signature_help" },
-            { name = "path" },
-        }, {
-            { name = "buffer" },
-        })
-    })
-
-    cmp.setup.cmdline({ '/', '?' }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = { { name = 'buffer' } },
-    })
-
-    cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({ { name = 'path' } },
-            { { name = 'cmdline' } })
-    })
-end
-
 local function lsp_config(_, opts)
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
 
     local lspconfig = require('lspconfig')
 
@@ -197,7 +129,8 @@ return {
                         end
                     end,
                 },
-            }
+            },
+            "saghen/blink.cmp",
         },
         config = lsp_config,
     },
@@ -232,18 +165,42 @@ return {
         },
     },
     {
-        "hrsh7th/nvim-cmp",
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-nvim-lsp-signature-help",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline",
-            "dcampos/nvim-snippy",
-            "dcampos/cmp-snippy",
-            "honza/vim-snippets",
+        "saghen/blink.cmp",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        version = "v0.13.0",
+        opts = {
+            keymap = {
+                preset = "enter",
+                ["<Tab>"] = {
+                    function(cmp)
+                        if cmp.is_menu_visible() then
+                            return require("blink.cmp").select_next()
+                        elseif cmp.snippet_active() then
+                            return cmp.snippet_forward()
+                        end
+                    end,
+                    "fallback",
+                },
+                ["<S-Tab>"] = {
+                    function(cmp)
+                        if cmp.is_menu_visible() then
+                            return require("blink.cmp").select_prev()
+                        elseif cmp.snippet_active() then
+                            return cmp.snippet_backward()
+                        end
+                    end,
+                    "fallback",
+                },
+            },
+            signature = {
+                enabled = true,
+                window = { border = "rounded" },
+            },
+            sources = {
+                default = { "lsp", "path", "snippets", "buffer" },
+            },
         },
-        config = cmp_config,
+        opts_extend = { "sources.default" },
     },
     {
         "glacambre/firenvim",
