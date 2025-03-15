@@ -169,6 +169,9 @@ return {
         dependencies = { "rafamadriz/friendly-snippets" },
         version = "v0.13.0",
         opts = {
+            completion = {
+                list = { selection = { preselect = false, auto_insert = true } },
+            },
             keymap = {
                 preset = "enter",
                 ["<Tab>"] = {
