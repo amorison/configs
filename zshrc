@@ -34,8 +34,11 @@ autoload -Uz sshmount sshumount
 eval $(dircolors)  # set LS_COLORS
 
 typeset -a add_to_path
-add_to_path=(~/.local/bin
-             ~/.cargo/bin)
+add_to_path=(
+    ~/.local/bin
+    ~/.juliaup/bin
+    ~/.cargo/bin
+)
 typeset -U path
 for dirname in ${add_to_path}; do
     if [ -d "${dirname}" ]; then
