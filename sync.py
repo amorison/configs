@@ -134,6 +134,7 @@ class FileInGitRepo:
             print("    updating local clone")
             _ = subprocess.run(
                 args=("git", "pull"),
+                check=True,
                 cwd=self.local_clone,
             )
         else:
@@ -147,6 +148,7 @@ class FileInGitRepo:
                     self.url,
                     self.local_clone,
                 ),
+                check=True,
             )
         if self._fetched_path.exists():
             return self._fetched_path
@@ -163,7 +165,7 @@ class PyTool:
         cmd = ["uv", "tool", "install", "--upgrade", self.name]
         for dep in self.with_deps:
             cmd.extend(("--with", dep))
-        _ = subprocess.run(cmd)
+        _ = subprocess.run(cmd, check=True)
 
 
 if __name__ == "__main__":
