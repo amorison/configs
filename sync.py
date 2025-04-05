@@ -106,7 +106,7 @@ class NvimApp:
             return self._appimage_path
         print("    extracting image...")
         _ = subprocess.run(
-            args=[f"./{self._appimage_path.name}", "--appimage-extract"],
+            args=[self._appimage_path.resolve(), "--appimage-extract"],
             check=True,
             capture_output=True,
             cwd=self.local_dir,
