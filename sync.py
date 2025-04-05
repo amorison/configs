@@ -49,8 +49,12 @@ class RemoteFile:
 @dataclass(frozen=True)
 class NvimApp:
     local_dir: Path
-    image_url: str = "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage"
-    sha256_url: str = "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage.sha256sum"
+    release: str = "stable"
+    asset_name: str = "nvim-linux-x86_64.appimage"
+
+    @property
+    def _release_url(self) -> str:
+        return f"https://github.com/neovim/neovim/releases/download/{self.release}"
 
     @property
     def _appimage_path(self) -> Path:
@@ -59,28 +63,36 @@ class NvimApp:
     @property
     def _appimage(self) -> RemoteFile:
         return RemoteFile(
-            url=self.image_url,
+            url=f"{self._release_url}/{self.asset_name}",
             local_path=self._appimage_path,
         )
 
     @property
-    def _sha256_path(self) -> Path:
-        return self.local_dir / "nvim.appimage.sha256sum"
+    def _shasum_path(self) -> Path:
+        return self.local_dir / "nvim-shasum.txt"
 
     @property
-    def _sha256(self) -> RemoteFile:
+    def _shasum(self) -> RemoteFile:
         return RemoteFile(
-            url=self.sha256_url,
-            local_path=self._sha256_path,
+            url=f"{self._release_url}/shasum.txt",
+            local_path=self._shasum_path,
         )
+
+    def _extract_shasum(self, force: bool) -> str:
+        self._shasum.download(force)
+        shasums = self._shasum_path.read_text()
+        for ln in shasums.splitlines():
+            checksum, asset = ln.split()
+            if asset == self.asset_name:
+                return checksum
+        raise RuntimeError(f"checksum not found for {self.asset_name}")
 
     def download(self, force: bool) -> Path:
         """Fetch nvim app, return path of executable."""
         print("Downloading nvim...")
         self.local_dir.mkdir(parents=True, exist_ok=True)
         self._appimage.download(force)
-        self._sha256.download(force)
-        sha256_expected = self._sha256_path.read_text().split()[0]
+        sha256_expected = self._extract_shasum(force)
         sha256 = hashlib.sha256()
         sha256.update(self._appimage_path.read_bytes())
         if sha256.hexdigest() != sha256_expected:
