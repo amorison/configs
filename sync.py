@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import hashlib
-import shlex
 import shutil
 import stat
 import subprocess
@@ -134,15 +133,13 @@ class FileInGitRepo:
         if self.local_clone.exists():
             print("    updating local clone")
             _ = subprocess.run(
-                args=shlex.split("git pull"),
+                args=("git", "pull"),
                 cwd=self.local_clone,
             )
         else:
             print("    cloning repository")
             _ = subprocess.run(
-                args=shlex.split(
-                    f"git clone --depth=1 '{self.url}' '{self.local_clone}'"
-                ),
+                args=("git", "clone", "--depth=1", self.url, self.local_clone),
             )
         if self._fetched_path.exists():
             return self._fetched_path
