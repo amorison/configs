@@ -139,7 +139,14 @@ class FileInGitRepo:
         else:
             print("    cloning repository")
             _ = subprocess.run(
-                args=("git", "clone", "--depth=1", self.url, self.local_clone),
+                args=(
+                    "git",
+                    "clone",
+                    "--filter",
+                    "blob:none",
+                    self.url,
+                    self.local_clone,
+                ),
             )
         if self._fetched_path.exists():
             return self._fetched_path
