@@ -178,6 +178,7 @@ return {
         opts = {
             completion = {
                 list = { selection = { preselect = false, auto_insert = true } },
+                documentation = { auto_show = true },
             },
             keymap = {
                 preset = "enter",
