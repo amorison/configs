@@ -1,3 +1,10 @@
+local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and
+        vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):
+        match("%s") == nil
+end
+
 local function lsp_config(_, opts)
     local capabilities = require('blink.cmp').get_lsp_capabilities()
 
@@ -180,6 +187,8 @@ return {
                             return require("blink.cmp").select_next()
                         elseif cmp.snippet_active() then
                             return cmp.snippet_forward()
+                        elseif has_words_before() then
+                            return cmp.show()
                         end
                     end,
                     "fallback",
