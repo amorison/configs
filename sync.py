@@ -30,6 +30,15 @@ class Symlink:
 
 
 @dataclass(frozen=True)
+class RemoteContent:
+    url: str
+
+    def get(self) -> bytes:
+        with urlopen(self.url) as response:
+            return response.read()
+
+
+@dataclass(frozen=True)
 class RemoteFile:
     url: str
     local_path: Path
@@ -40,9 +49,7 @@ class RemoteFile:
             print("    already exists")
         else:
             self.local_path.parent.mkdir(parents=True, exist_ok=True)
-            with urlopen(self.url) as response:
-                with self.local_path.open("wb") as local:
-                    shutil.copyfileobj(response, local)
+            _ = self.local_path.write_bytes(RemoteContent(self.url).get())
 
 
 @dataclass(frozen=True)
