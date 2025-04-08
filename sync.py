@@ -68,11 +68,8 @@ class NvimApp:
         return self.local_dir / "nvim.appimage"
 
     @property
-    def _appimage(self) -> RemoteFile:
-        return RemoteFile(
-            url=f"{self._release_url}/{self.asset_name}",
-            local_path=self._appimage_path,
-        )
+    def _appimage(self) -> RemoteContent:
+        return RemoteContent(url=f"{self._release_url}/{self.asset_name}")
 
     @cached_property
     def _shasum(self) -> str:
@@ -88,11 +85,12 @@ class NvimApp:
         """Fetch nvim app, return path of executable."""
         print("Downloading nvim...")
         self.local_dir.mkdir(parents=True, exist_ok=True)
-        self._appimage.download(force)
+        appimage = self._appimage.get()
         sha256 = hashlib.sha256()
-        sha256.update(self._appimage_path.read_bytes())
+        sha256.update(appimage)
         if sha256.hexdigest() != self._shasum:
             raise RuntimeError("sha256 of nvim doesn't match")
+        _ = self._appimage_path.write_bytes(appimage)
         stats = self._appimage_path.stat()
         self._appimage_path.chmod(stats.st_mode | stat.S_IXUSR)
         bare_img = subprocess.run(
