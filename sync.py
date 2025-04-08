@@ -81,7 +81,7 @@ class NvimApp:
                 return checksum
         raise RuntimeError(f"checksum not found for {self.asset_name}")
 
-    def download(self, force: bool) -> Path:
+    def download(self) -> Path:
         """Fetch nvim app, return path of executable."""
         print("Downloading nvim...")
         self.local_dir.mkdir(parents=True, exist_ok=True)
@@ -236,7 +236,7 @@ if __name__ == "__main__":
     ]
 
     if shutil.which("nvim") is None:
-        nvim = NvimApp(local_dir=Path(".nvim")).download(args.force)
+        nvim = NvimApp(local_dir=Path(".nvim")).download()
         links.append(Symlink(path=home / ".local/bin/nvim", target=nvim))
 
     for link in links:
