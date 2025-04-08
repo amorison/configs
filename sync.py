@@ -7,6 +7,7 @@ import shutil
 import stat
 import subprocess
 from dataclasses import dataclass
+from functools import cached_property
 from pathlib import Path
 from urllib.request import urlopen
 
@@ -73,20 +74,10 @@ class NvimApp:
             local_path=self._appimage_path,
         )
 
-    @property
-    def _shasum_path(self) -> Path:
-        return self.local_dir / "nvim-shasum.txt"
-
-    @property
-    def _shasum(self) -> RemoteFile:
-        return RemoteFile(
-            url=f"{self._release_url}/shasum.txt",
-            local_path=self._shasum_path,
-        )
-
-    def _extract_shasum(self, force: bool) -> str:
-        self._shasum.download(force)
-        shasums = self._shasum_path.read_text()
+    @cached_property
+    def _shasum(self) -> str:
+        rc = RemoteContent(url=f"{self._release_url}/shasum.txt")
+        shasums = rc.get().decode()
         for ln in shasums.splitlines():
             checksum, asset = ln.split()
             if asset == self.asset_name:
@@ -98,10 +89,9 @@ class NvimApp:
         print("Downloading nvim...")
         self.local_dir.mkdir(parents=True, exist_ok=True)
         self._appimage.download(force)
-        sha256_expected = self._extract_shasum(force)
         sha256 = hashlib.sha256()
         sha256.update(self._appimage_path.read_bytes())
-        if sha256.hexdigest() != sha256_expected:
+        if sha256.hexdigest() != self._shasum:
             raise RuntimeError("sha256 of nvim doesn't match")
         stats = self._appimage_path.stat()
         self._appimage_path.chmod(stats.st_mode | stat.S_IXUSR)
