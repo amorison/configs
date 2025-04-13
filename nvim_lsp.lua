@@ -1,50 +1,49 @@
-vim.lsp.inlay_hint.enable(true)
-
-vim.lsp.enable("clangd")
-vim.lsp.enable("jsonls")
-vim.lsp.enable("rust_analyzer")
-vim.lsp.enable("texlab")
-
-vim.lsp.enable("basedpyright")
-vim.lsp.config("basedpyright", {
+local servers = {
     basedpyright = {
-        diagnosticMode = "openFilesOnly",
-        disableOrganizeImports = true,
-    },
-})
-
-vim.lsp.enable("fortls")
-vim.lsp.config("fortls", {
-    cmd = {
-        "fortls", "--notify_init", "--hover_signature",
-        "--hover_language=fortran", "--use_signature_help",
-        "--lowercase_intrinsics",
-    },
-})
-
-vim.lsp.enable("lua_ls")
-vim.lsp.config("lua_ls", {
-    settings = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false, },
-            format = { defaultConfig = { align_array_table = "false" } },
+        basedpyright = {
+            diagnosticMode = "openFilesOnly",
+            disableOrganizeImports = true,
         },
     },
-})
-
-vim.lsp.enable("ruff")
-vim.lsp.config("ruff", {
-    init_options = {
+    clangd = nil,
+    fortls = {
+        cmd = {
+            "fortls", "--notify_init", "--hover_signature",
+            "--hover_language=fortran", "--use_signature_help",
+            "--lowercase_intrinsics",
+        },
+    },
+    jsonls = nil,
+    lua_ls = {
         settings = {
-            lint = {
-                extendSelect = { "I" },
+            Lua = {
+                workspace = { checkThirdParty = false },
+                telemetry = { enable = false, },
+                format = { defaultConfig = { align_array_table = "false" } },
             },
         },
     },
-})
+    ruff = {
+        init_options = {
+            settings = {
+                lint = {
+                    extendSelect = { "I" },
+                },
+            },
+        },
+    },
+    rust_analyzer = nil,
+    texlab = nil,
+    tinymist = {
+        root_markers = { "typst.toml", ".git" },
+    },
+}
 
-vim.lsp.enable("tinymist")
-vim.lsp.config("tinymist", {
-    root_markers = { "typst.toml", ".git" },
-})
+vim.lsp.inlay_hint.enable(true)
+
+for name, conf in pairs(servers) do
+    vim.lsp.enable(name)
+    if conf then
+        vim.lsp.config(name, conf)
+    end
+end
