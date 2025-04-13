@@ -120,25 +120,20 @@ return {
         },
     },
     {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+            library = {
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            },
+        },
+    },
+    {
         "neovim/nvim-lspconfig",
         opts = {
             inlay_hints = { enabled = true },
         },
-        dependencies = {
-            {
-                "folke/neodev.nvim",
-                opts = {
-                    override = function(root_dir, library)
-                        local stat = vim.loop.fs_stat(root_dir .. "/nvim.lua")
-                        if stat and stat.type then
-                            library.enabled = true
-                            library.plugins = true
-                        end
-                    end,
-                },
-            },
-            "saghen/blink.cmp",
-        },
+        dependencies = { "saghen/blink.cmp" },
         config = lsp_config,
     },
     {
@@ -210,9 +205,14 @@ return {
                 window = { border = "rounded" },
             },
             sources = {
-                default = { "lsp", "path", "snippets", "buffer" },
+                default = { "lazydev", "lsp", "path", "snippets", "buffer" },
                 providers = {
                     path = { opts = { show_hidden_files_by_default = true } },
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        score_offset = 100,
+                    },
                 },
             },
         },
