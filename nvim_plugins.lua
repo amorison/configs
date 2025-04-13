@@ -5,71 +5,6 @@ local has_words_before = function()
         match("%s") == nil
 end
 
-local function lsp_config(_, opts)
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-    local lspconfig = require('lspconfig')
-
-    lspconfig.lua_ls.setup {
-        capabilities = capabilities,
-        settings = {
-            Lua = {
-                workspace = { checkThirdParty = false },
-                telemetry = { enable = false, },
-                format = { defaultConfig = { align_array_table = "false" } },
-            },
-        },
-    }
-
-    lspconfig.rust_analyzer.setup { capabilities = capabilities, }
-
-    lspconfig.clangd.setup { capabilities = capabilities }
-
-    lspconfig.fortls.setup {
-        capabilities = capabilities,
-        cmd = {
-            "fortls", "--notify_init", "--hover_signature",
-            "--hover_language=fortran", "--use_signature_help",
-            "--lowercase_intrinsics",
-        },
-    }
-
-    lspconfig.jsonls.setup { capabilities = capabilities }
-
-    lspconfig.basedpyright.setup {
-        capabilities = capabilities,
-        basedpyright = {
-            diagnosticMode = "openFilesOnly",
-            disableOrganizeImports = true,
-        },
-    }
-
-    lspconfig.ruff.setup {
-        capabilities = capabilities,
-        init_options = {
-            settings = {
-                lint = {
-                    extendSelect = { "I" },
-                },
-            },
-        },
-    }
-
-    lspconfig.texlab.setup { capabilities = capabilities }
-
-    lspconfig.tinymist.setup {
-        capabilities = capabilities,
-        root_dir = function(fname)
-            return require("lspconfig.util").root_pattern("typst.toml", ".git")(fname)
-                or vim.fn.getcwd()
-        end,
-    }
-
-    if opts.inlay_hints.enabled then
-        vim.lsp.inlay_hint.enable(true)
-    end
-end
-
 return {
     {
         "rebelot/kanagawa.nvim",
@@ -130,11 +65,7 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        opts = {
-            inlay_hints = { enabled = true },
-        },
         dependencies = { "saghen/blink.cmp" },
-        config = lsp_config,
     },
     {
         "j-hui/fidget.nvim",
