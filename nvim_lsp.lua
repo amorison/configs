@@ -5,7 +5,7 @@ local servers = {
             disableOrganizeImports = true,
         },
     },
-    clangd = nil,
+    clangd = {},
     fortls = {
         cmd = {
             "fortls", "--notify_init", "--hover_signature",
@@ -13,7 +13,7 @@ local servers = {
             "--lowercase_intrinsics",
         },
     },
-    jsonls = nil,
+    jsonls = {},
     lua_ls = {
         settings = {
             Lua = {
@@ -32,8 +32,8 @@ local servers = {
             },
         },
     },
-    rust_analyzer = nil,
-    texlab = nil,
+    rust_analyzer = {},
+    texlab = {},
     tinymist = {
         root_markers = { "typst.toml", ".git" },
     },
@@ -43,7 +43,5 @@ vim.lsp.inlay_hint.enable(true)
 
 for name, conf in pairs(servers) do
     vim.lsp.enable(name)
-    if conf then
-        vim.lsp.config(name, conf)
-    end
+    vim.lsp.config(name, conf)
 end
