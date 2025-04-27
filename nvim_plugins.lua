@@ -165,8 +165,6 @@ return {
                     },
                 },
             }
-        end,
-        config = function()
             if vim.g.started_by_firenvim then
                 vim.opt.background = "light"
             end
