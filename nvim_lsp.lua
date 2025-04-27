@@ -42,6 +42,6 @@ local servers = {
 vim.lsp.inlay_hint.enable(true)
 
 for name, conf in pairs(servers) do
-    vim.lsp.enable(name)
     vim.lsp.config(name, conf)
+    vim.lsp.enable(name)
 end
