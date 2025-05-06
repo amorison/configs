@@ -13,6 +13,7 @@ local servers = {
             "--lowercase_intrinsics",
         },
     },
+    jdtls = {},
     jsonls = {},
     lua_ls = {
         settings = {
