@@ -50,7 +50,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 vim.api.nvim_create_autocmd('BufWritePre', {
     callback = function()
-        vim.lsp.buf.format({ async = false })
+        vim.lsp.buf.format({
+            async = false,
+            filter = function(client) return client.name ~= "ts_ls" end
+        })
     end,
 })
 

@@ -6,6 +6,7 @@ local servers = {
         },
     },
     clangd = {},
+    eslint = {},
     fortls = {
         cmd = {
             "fortls", "--notify_init", "--hover_signature",
@@ -38,6 +39,7 @@ local servers = {
     tinymist = {
         root_markers = { "typst.toml", ".git" },
     },
+    ts_ls = {},
 }
 
 vim.lsp.inlay_hint.enable(true)
