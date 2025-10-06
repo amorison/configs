@@ -11,7 +11,7 @@ one-file-system = true
 [[backup.snapshots]]
 sources = ["/home/adrien/.ssh/config"]
 one-file-system = true
-skip-identical-parent = true
+skip-if-unchanged = true
 
 [forget]
 keep-within-hourly = "7 days"
