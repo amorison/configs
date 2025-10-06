@@ -18,3 +18,4 @@ keep-within-hourly = "7 days"
 keep-within-daily = "1 month"
 keep-within-monthly = "3 years"
 keep-within-half-yearly = "10 years"
+delete-unchanged = true
