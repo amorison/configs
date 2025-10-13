@@ -7,7 +7,6 @@ necessary):
 
 ```sh
 secret-tool store --label="Rustic repository password" rustic-backup manwe-hdd
-secret-tool store --label="Rustic repository password" rustic-backup gdrive
 ```
 
 `systemd` service files go in `~/.config/systemd/user/`, enable the timer.
