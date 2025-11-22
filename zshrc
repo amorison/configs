@@ -51,6 +51,7 @@ export EDITOR=nvim
 source ~/.alias
 
 unfunction safesource
+[[ ! -S /run/user/1000/gcr/ssh ]] || export SSH_AUTH_SOCK=/run/user/1000/gcr/ssh
 
 source ~/.zshsynthl
 
