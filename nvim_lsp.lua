@@ -16,6 +16,7 @@ local servers = {
     },
     jdtls = {},
     jsonls = {},
+    julials = {},
     lua_ls = {
         settings = {
             Lua = {

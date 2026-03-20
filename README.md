@@ -25,6 +25,7 @@ The following LSP servers are used and need to be installed:
 - https://github.com/latex-lsp/texlab
 - https://github.com/LuaLS/lua-language-server
 - some servers are installed by `sync.py` via `uv`
+- Julia LSP can be installed with `julia -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer"); Pkg.add("StaticLint")'`
 
 ### Starship
 
