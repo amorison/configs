@@ -193,6 +193,7 @@ if __name__ == "__main__":
         Symlink(path=home / ".alias", target="alias"),
         Symlink(path=home / ".tmux.conf", target="tmux.conf"),
         Symlink(path=config / "wezterm/wezterm.lua", target="wezterm.lua"),
+        Symlink(path=config / "kitty" / "kitty.conf", target="kitty.conf"),
         # bash
         Symlink(path=home / ".bashrc", target="bashrc"),
         Symlink(path=config / "starship.toml", target="starship.toml"),
