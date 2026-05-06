@@ -73,19 +73,16 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        build = function()
-            require("nvim-treesitter.install").update({ with_sync = true })()
-        end,
+        build = ':TSUpdate',
         config = function()
-            local configs = require("nvim-treesitter.configs")
-
-            ---@diagnostic disable-next-line: missing-fields
-            configs.setup({
-                ensure_installed = { "c", "lua", "vim", "vimdoc", "fortran", "python", "cmake", "just", "typst" },
-                sync_install = false,
-                highlight = { enable = true },
-                indent = { enable = true },
-            })
+            local ts = require("nvim-treesitter")
+            ts.install({
+                "c", "cpp", "fortran", "rust",
+                "cmake", "just",
+                "lua", "python", "julia",
+                "vim", "vimdoc",
+                "typst", "markdown",
+                "toml"})
         end
     },
     {
