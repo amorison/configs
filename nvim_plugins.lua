@@ -146,24 +146,4 @@ return {
         },
         opts_extend = { "sources.default" },
     },
-    {
-        "glacambre/firenvim",
-        lazy = not vim.g.started_by_firenvim,
-        build = function()
-            require("lazy").load({ plugins = { "firenvim" }, wait = true })
-            vim.fn['firenvim#install'](0)
-        end,
-        init = function()
-            vim.g.firenvim_config = {
-                localSettings = {
-                    [".*"] = {
-                        takeover = "never",
-                    },
-                },
-            }
-            if vim.g.started_by_firenvim then
-                vim.opt.background = "light"
-            end
-        end,
-    }
 }
