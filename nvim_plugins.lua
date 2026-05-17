@@ -72,18 +72,12 @@ return {
         config = true,
     },
     {
-        "nvim-treesitter/nvim-treesitter",
-        build = ':TSUpdate',
-        config = function()
-            local ts = require("nvim-treesitter")
-            ts.install({
-                "c", "cpp", "fortran", "rust",
-                "cmake", "just",
-                "lua", "python", "julia",
-                "vim", "vimdoc",
-                "typst", "markdown",
-                "toml"})
-        end
+        "VonHeikemen/ts-enable.nvim",
+        opts = {
+            auto_init = true,
+            auto_install = true,
+            highlights = true,
+        },
     },
     {
         "lewis6991/gitsigns.nvim",
