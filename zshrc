@@ -29,7 +29,7 @@ function safesource () if [ -f "$1" ]; then source $1; fi
 
 safesource /usr/share/doc/pkgfile/command-not-found.zsh
 
-autoload -Uz sshmount sshumount
+autoload -Uz sshmount sshumount vpy
 
 eval $(dircolors)  # set LS_COLORS
 

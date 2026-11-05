@@ -1,0 +1,8 @@
+# vim: filetype=zsh
+
+local pyreqs=()
+for opt in $@
+do
+    [[ "${opt: -3}" == ".py" ]] && pyreqs+=("--with-requirements=$opt")
+done
+uv run ${pyreqs} -- nvim "$@"
