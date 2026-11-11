@@ -1,10 +1,4 @@
 local servers = {
-    basedpyright = {
-        basedpyright = {
-            diagnosticMode = "openFilesOnly",
-            disableOrganizeImports = true,
-        },
-    },
     clangd = {},
     eslint = {},
     fortls = {
@@ -41,6 +35,13 @@ local servers = {
         root_markers = { "typst.toml", ".git" },
     },
     ts_ls = {},
+    ty = {
+        init_options = {
+            experimental = {
+                useUv = 'scripts',
+            },
+        },
+    },
 }
 
 vim.lsp.inlay_hint.enable(true)
