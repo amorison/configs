@@ -232,7 +232,6 @@ if __name__ == "__main__":
     links.append(Symlink(path=home / ".zshsynthl", target=zsh_hl.fetch()))
 
     py_packs = [
-        PyTool("basedpyright"),
         PyTool("ruff"),
         PyTool("fortls"),
     ]
