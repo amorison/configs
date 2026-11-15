@@ -96,6 +96,7 @@ class NvimApp:
         bare_img = subprocess.run(
             args=[f"{self._appimage_path}", "--version"],
             capture_output=True,
+            check=False,
         )
         if bare_img.returncode == 0:
             return self._appimage_path
