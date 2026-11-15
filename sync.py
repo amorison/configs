@@ -236,6 +236,7 @@ if __name__ == "__main__":
 
     py_packs = [
         PyTool("ruff"),
+        PyTool("ty"),
         PyTool("fortls"),
     ]
 
