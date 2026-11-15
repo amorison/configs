@@ -2,8 +2,8 @@
 
 Various config files.
 
-The script `sync.py` (Python 3.8+) installs and creates soft links to config
-files in the appropriate locations.
+The script `sync.py` creates soft links to config files in the appropriate
+locations, and installs some software used by the configurations.
 
 Use the `-f` option `./sync.py -f` to remove existing files before linking.
 
