@@ -156,6 +156,9 @@ class PyTool:
     with_deps: tuple[str, ...] = ()
 
     def install(self) -> None:
+        if (path := shutil.which(self.name)) is not None:
+            print(f"{self.name} already installed at {path}")
+            return
         print(f"installing {self.name} with uv")
         cmd = ["uv", "tool", "install", "--upgrade", self.name]
         for dep in self.with_deps:
